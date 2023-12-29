@@ -1,0 +1,11 @@
+.customcolorbutton {
+   width: 14.56rem;
+  height: 3.82rem;
+  background-color: var(--dark-yellow);
+  border: none;
+  margin-top: 4rem;
+  border-radius: 2.729rem;
+  font-size: 1.364rem;
+  color: var(--primary-white);
+  font-weight: 500;
+}

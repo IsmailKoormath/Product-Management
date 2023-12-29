@@ -1,0 +1,13 @@
+.borderLineButton {
+  display: flex;
+  width: 14.56rem;
+  height: 3.82rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2.729rem;
+  border: 2.184px solid var(--primary-white);
+  font-size: 1.364rem;
+   color: var(--primary-white);
+  background: transparent;
+  font-weight: 500;
+}

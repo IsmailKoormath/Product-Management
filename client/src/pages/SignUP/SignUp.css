@@ -1,0 +1,40 @@
+.signupPage {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+.signup-leftSide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 45.03981rem;
+  color: var(--primary-white);
+  gap: 2.24rem;
+  background-image: url("../../assets/Images/sign\ up.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.signup-leftSide h1 {
+  font-size: 2.548rem;
+  font-weight: 700;
+}
+.signup-leftSide p{
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+.signup-rightSide {
+  display: flex;
+  margin-top: 10rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.createAccount {
+  color: var(--dark-yellow);
+  font-size: 2.548rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+}
