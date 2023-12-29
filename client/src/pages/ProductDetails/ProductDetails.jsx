@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import tick from '../../assets/Icons/tick.svg'
 import laptop from '../../assets/Images/laptop.png'
-import BodyButton from '../../components/BodyButton/BodyButton'
 import './ProductDetails.css'
 import Header from '../../components/Header/Header'
 
@@ -16,7 +15,7 @@ const ProductDetails = () => {
     setWishlist(!wishlist)
   }
 
-  // couter function
+  // couter functions
   const increment = () => {
     setCount(count+1)
   }

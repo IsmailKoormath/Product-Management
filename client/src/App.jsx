@@ -13,7 +13,7 @@ function App() {
       {/* <SignUp/> */}
       {/* <SignIn/> */}
      < Home/>
-      {/* <ProductDetails/> */}
+      <ProductDetails/>
     </div>
   );
 }
