@@ -1,0 +1,6 @@
+.homepage {
+  width: 100%;
+  height: calc(100vh - 6.25rem);
+  display: flex;
+  align-items: flex-start;
+}

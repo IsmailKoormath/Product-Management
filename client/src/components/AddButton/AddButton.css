@@ -1,0 +1,18 @@
+.AddButton {
+  width: 6rem;
+  height: 3rem;
+  border-radius: 0.58rem;
+  background: var(--dark-yellow);
+  color: var(--primary-white);
+  font-size: 1.25rem;
+  font-weight: 500;
+  border: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.DiscardButton {
+  width: 7rem;
+  flex-shrink: 0;
+  color: #3c3c3c;
+  background: #eee;
+}

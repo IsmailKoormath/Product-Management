@@ -1,0 +1,22 @@
+.itemPanel_main {
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.itemPanel_button_container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-left: auto;
+}
+.panel_card_container {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.66rem;
+}

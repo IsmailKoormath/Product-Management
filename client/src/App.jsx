@@ -3,6 +3,7 @@ import SignUp from './pages/SignUP/SignUp';
 import SignIn from './pages/SignIn/SignIn';
 import ProductDetails from './pages/ProductDetails/ProductDetails';
 import Header from './components/Header/Header';
+import Home from './pages/Home/Home';
 
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
       {/* <Header/> */}
       {/* <SignUp/> */}
       {/* <SignIn/> */}
-      <ProductDetails/>
+     < Home/>
+      {/* <ProductDetails/> */}
     </div>
   );
 }
