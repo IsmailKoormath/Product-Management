@@ -10,4 +10,5 @@
    color: var(--primary-white);
   background: transparent;
   font-weight: 500;
+    cursor: pointer;
 }
