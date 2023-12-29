@@ -1,14 +1,19 @@
 import React from 'react'
 import tick from '../../assets/Icons/tick.svg'
 import laptop from '../../assets/Images/laptop.png'
+import BodyButton from '../../components/BodyButton/BodyButton'
+import './ProductDetails.css'
+import Header from '../../components/Header/Header'
 const ProductDetails = () => {
   return (
-    <div>
+    <>
+    <Header/>
+    <div className='productDetailspage'>
       <div className='productImages'>
-        <div><img src={laptop} alt='product' /></div>
-        <div>
-          <div><img src={laptop} alt='product' /></div>
-          <div><img src={laptop} alt='product' /></div>
+        <div className='productMainImage'><img src={laptop} alt='product' /></div>
+        <div className='moreImages'>
+          <div className='otherImages'><img src={laptop} alt='product' /></div>
+            <div className='otherImages'><img src={laptop} alt='product' /></div>
         </div>
       </div>
       <div className='productsDetails'>
@@ -19,8 +24,11 @@ const ProductDetails = () => {
         <div className='line'></div>
         <p>Ram: <div>4 GB</div></p>
         <p>Quantity:<div><button>-</button><span>1</span><button>+</button></div></p>
+        <div className='productDetails-Buttons'> <BodyButton text={'Edit product'} borderRadius={"1.6rem"} fontSize={"1.2rem"} onClick={''} /> <BodyButton text={'Buy it now'} borderRadius={"1.6rem"} fontSize={"1.2rem"} onClick={''} /></div>
+       
       </div>
     </div>
+    </>
   )
 }
 

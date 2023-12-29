@@ -1,0 +1,7 @@
+.bodyButton_main {
+  background: var(--dark-yellow);
+  color: var(--primary-white);
+  font-weight: 600;
+  padding: 1.1rem 1.5rem;
+  cursor: pointer;
+}

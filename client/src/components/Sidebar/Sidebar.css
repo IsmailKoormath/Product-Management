@@ -1,0 +1,33 @@
+.sidebar_main {
+  width: 20rem;
+  height: 100%;
+  padding: 3rem 0 3rem 3rem;
+}
+.home_container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  color: #3a3a3a;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.arrow_icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.categories_text {
+  margin-top: 3.5rem;
+}
+.categories_text,
+.allCategories_text {
+  color: var(--dark-blue);
+  font-size: 1.00563rem;
+  font-weight: 500;
+}
+.allCategories_text {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: #222;
+  font-weight: 400;
+}
