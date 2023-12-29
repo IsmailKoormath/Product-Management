@@ -10,16 +10,17 @@
   justify-content: center;
   text-align: center;
   width: 100%;
+  margin-top: 4rem;
 }
 .signin-heading{
       color: var(--dark-yellow);
   font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .signin-leftside .forgot{
 padding-top: 2rem;
-padding-bottom: -20px;
+padding-bottom: 30px;
 color: #373737;
 font-size: 1.37rem;
 font-weight: 700;
@@ -31,10 +32,13 @@ text-decoration-line: underline;
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: 45.03981rem;
+  width: 48.03981rem;
   color: var(--primary-white);
   gap: 2.24rem;
   background-image: url("../../assets/Images/Sign\ in.png");
   background-size: cover;
   background-repeat: no-repeat;
+}
+.signin-rightside h1{
+font-size: 2.5rem;
 }
