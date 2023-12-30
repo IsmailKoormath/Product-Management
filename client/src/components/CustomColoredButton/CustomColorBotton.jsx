@@ -1,9 +1,9 @@
 import React from 'react'
 import "./CustomColorButton.css"
-const CustomColorBotton = ({text}) => {
+const CustomColorBotton = ({ text, handleSubmit }) => {
   return (
     <div>
-      <button className='customcolorbutton'>{text}</button>
+      <button onClick={handleSubmit} className='customcolorbutton'>{text}</button>
     </div>
   )
 }

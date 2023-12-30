@@ -1,53 +1,25 @@
-import bcrypt from 'bcrypt'
-import User from "../models/userModel.js";
-import generateToken from '../config/jwtToken.js';
+import { userLogin, userSignUp } from "../services/auth.service.js";
 
-
-// create a new user
-
-export const signup = async (req, res, next) => {
-  const { name, email, password } = req.body;
-
-  let existingUser;
+//...........sign-up...............//
+export async function signUp(req, res, next) {
   try {
-    existingUser = await User.findOne({ email });
-  } catch (err) {
-    return console.log(err);
-  }
-  if (existingUser) {
-    return res
-      .status(400)
-      .json({ message: "User Already Exists! Login Instead" });
-  }
-   const hashedPassword = bcrypt.hashSync(password, 10);
-  const user = new User({
-    name,
-    email,
-    password: hashedPassword,
-  });
+    const userdata = req.body;
 
-  try {
-    await user.save();
+    const result = await userSignUp(userdata);
+    res.send(result);
   } catch (err) {
     next(err);
   }
-  return res.status(201).json({ user });
-};
+}
 
-// Sign In
+//...........login...............//
+export async function login(req, res, next) {
+  const loginData = req.body;
 
-export const Login = async (req, res, next) => {
-  const { email, password } = req.body;
-   
-  const existingUser = await User.findOne({ email });
-
-  if (!existingUser) {
-    return res.status(404).json({ message: "Invalid username or password" });
+  try {
+    const response = await userLogin(loginData);
+    res.status(200).send(response);
+  } catch (err) {
+    next(err);
   }
-  const isPasswordCorrect =await bcrypt.compare(password, existingUser.password);
-  if (!isPasswordCorrect) {
-    return res.status(400).json({ message: "Incorrect Password" });
-  }
-   const token = await generateToken();
-  return res.status(200).json({token, message: "Login Successfull" });
-};
+}

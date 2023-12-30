@@ -9,6 +9,10 @@ import crossIcon from "../../assets/Icons/cross-icon.svg";
 const ProductModal = ({ handleClose }) => {
   const [count, setCount] = useState(1);
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const[selectedSubCategory,setSelectedSubCategory]=useState()
+  const [product,setProduct]=useState({
+    count
+  })
 
   const handleIncreaseCount = () => {
     setCount((prevCount) => prevCount + 1);
@@ -18,6 +22,17 @@ const ProductModal = ({ handleClose }) => {
       setCount((prevCount) => prevCount - 1);
     }
   };
+  
+// take product details
+
+     const handleProductDetails = (e) => {
+       setProduct({
+         ...product,
+         [e.target.name]: e.target.value,
+       });
+     };
+
+ // take images from the file
 
   const handleFileChange = (event) => {
     const files = event.target.files;
@@ -29,6 +44,8 @@ const ProductModal = ({ handleClose }) => {
       alert("You can only pick up to 3 images.");
     }
   };
+
+  // remove image function
 
   const removeImage = (index) => {
     const newFiles = [...selectedFiles];
@@ -45,18 +62,28 @@ const ProductModal = ({ handleClose }) => {
         <form action="">
           <div className="row_container">
             <label htmlFor="title">Title :</label>
-            <input id="title" type="text" className="title_input" />
+            <input
+              name="title"
+              onChange={handleProductDetails}
+              id="title"
+              type="text"
+              className="title_input"
+            />
           </div>
           <div className="row_container">
             <label htmlFor="ram">Ram :</label>
             <div className="ram_input_row">
               <input
+                name="ram"
+                onChange={handleProductDetails}
                 id="ram"
                 type="number"
                 placeholder="Ram"
                 className="ram_input"
               />
               <input
+                name="price"
+                onChange={handleProductDetails}
                 id="number"
                 type="number"
                 placeholder="Price"
@@ -88,7 +115,7 @@ const ProductModal = ({ handleClose }) => {
             <label htmlFor="product" className="subCategoryLabel">
               sub category :
             </label>
-            <select name="" id="">
+            <select value={} onChange={} name="" id="">
               <option value="">Select sub category</option>
               <option value="">hello</option>
               <option value="">hai</option>
@@ -96,7 +123,7 @@ const ProductModal = ({ handleClose }) => {
           </div>
           <div className="row_container">
             <label htmlFor="description">Add Description :</label>
-            <input id="description" type="text" className="title_input" />
+            <input name="description" onChange={handleProductDetails} id="description" type="text" className="title_input" />
           </div>
           <div className="row_container">
             <label htmlFor="description">Upload image:</label>

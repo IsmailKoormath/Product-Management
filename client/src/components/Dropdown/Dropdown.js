@@ -1,13 +1,27 @@
 import React, { useState } from "react";
 import "./Dropdown.css";
-import arrow from "../../assets/Icons/arrow.svg";
+import arrow from "../../assets/arrow.svg";
 
-const Dropdown = ({labelText,options}) => {
+const Dropdown = ({ labelText, options }) => {
   const [show, setShow] = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
   const handleShowOptions = () => {
     setShow(!show);
   };
+
+  const handleCheckboxChange = (option) => {
+    const index = selectedOptions.indexOf(option);
+    if (index === -1) {
+      setSelectedOptions([...selectedOptions, option]);
+    } else {
+      const newSelectedOptions = [...selectedOptions];
+      newSelectedOptions.splice(index, 1);
+      setSelectedOptions(newSelectedOptions);
+    }
+  };
+
+  console.log(selectedOptions);
 
   return (
     <>
@@ -22,9 +36,14 @@ const Dropdown = ({labelText,options}) => {
       {show && (
         <div className="options_container">
           {options?.map((option) => (
-            <div class="checkbox-wrapper-13">
-              <input id="c1-13" type="checkbox" />
-              <label for="c1-13">{option}</label>
+            <div key={option} className="checkbox-wrapper-13">
+              <input
+                type="checkbox"
+                id={`checkbox-${option}`}
+                checked={selectedOptions.includes(option)}
+                onChange={() => handleCheckboxChange(option)}
+              />
+              <label htmlFor={`checkbox-${option}`}>{option}</label>
             </div>
           ))}
         </div>

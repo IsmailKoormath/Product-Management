@@ -1,11 +1,15 @@
 import mongoose from "mongoose";
+mongoose.set("strictQuery", false);
 
-const dbConnect = () => {
+const connection_string = "mongodb://127.0.0.1:27017/product-management";
+
+export async function initialize() {
   try {
-    const dbConnection = mongoose.connect(process.env.MONGODB_URL);
-    console.log("Database Connected Successfully");
-  } catch (error) {
-    console.log("Database error");
+    await mongoose.connect(connection_string);
+
+    console.log("mongod connected");
+  } catch (err) {
+    console.log("mongoDB connection error:", err);
+    throw err;
   }
-};
-export default dbConnect
+}

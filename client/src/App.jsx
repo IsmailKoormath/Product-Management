@@ -2,7 +2,6 @@ import './App.css';
 import SignUp from './pages/SignUP/SignUp';
 import SignIn from './pages/SignIn/SignIn';
 import ProductDetails from './pages/ProductDetails/ProductDetails';
-import Header from './components/Header/Header';
 import Home from './pages/Home/Home';
 import { BrowserRouter as Router,Routes,Route} from 'react-router-dom';
 
@@ -15,7 +14,7 @@ function App() {
           <Route path='/signup'element={<SignUp/>}/>
           <Route path='/'element={<SignIn/>}/>
           <Route path='/home'element={<Home/>}/>
-          <Route path='/productdetails'element={<ProductDetails/>}/>
+          <Route path='/productdetails/:id'element={<ProductDetails/>}/>
         </Routes>
       </Router>
     </div>

@@ -10,7 +10,7 @@ const CategoryModal = ({ handleClose, heading, placeholder, handleAccept }) => {
         <h3 className="heading_text">{heading}</h3>
         <form action="" className="categoryModal_form">
           {heading === "Add Sub Category" && (
-            <select name="" id="" className="categoryModal_selector">
+            <select value={}onChange={} name="" id="" className="categoryModal_selector">
               <option value="">Select category</option>
               <option value="">hello</option>
               <option value="">ok</option>
@@ -20,6 +20,7 @@ const CategoryModal = ({ handleClose, heading, placeholder, handleAccept }) => {
             type="text"
             placeholder={placeholder}
             className="categoryModal_input"
+            onChange={()=>handlechange()}
           />
         </form>
         <div className="button_container">
