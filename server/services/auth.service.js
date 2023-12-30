@@ -1,4 +1,4 @@
-import userModel from "../models/user.model.js";
+import userModel from "../models/userModel.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { HttpException } from "../exceptions/exceptions.js";

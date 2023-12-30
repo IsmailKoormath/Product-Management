@@ -3,7 +3,7 @@ import express from "express";
 import {
   getAllCategory,
   saveCategory,
-} from "../controllers/category.controller.js";
+} from "../controllers/categoryController.js";
 
 import { authorizeRoles } from "../middlewares/auth.middleware.js";
 import { ROLES } from "../constants/role.constants.js";

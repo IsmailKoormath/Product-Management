@@ -1,4 +1,4 @@
-import { isValidEmail } from "../utils/email.regex.js";
+import { isValidEmail } from "../src/utils/email.regex.js";
 
 export function userMiddleware(req, res, next) {
   // check if the "user" collection is present in the request body

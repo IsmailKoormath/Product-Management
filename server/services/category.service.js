@@ -1,4 +1,4 @@
-import categoryModel from "../models/category.model.js";
+import categoryModel from "../models/categoryModel.js";
 import lodash from "lodash";
 const { toNumber } = lodash;
 
