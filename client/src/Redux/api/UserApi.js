@@ -11,9 +11,9 @@ export const signUpApi = (input, navigate) => {
     dispatch(signUPRequest(input));
 
     try {
-      const user = await axios.post(`${BASICURL}/api/user/signup`, input);
+      const user = await axios.post(`${BASICURL}/auth/signup`, input);
       console.log(user);
-      if (user?.status === 201) {
+      if (user?.data?.message === `user registered successfully with email ${input.email}`) {
         dispatch(signUPSuccess(user.data));
         navigate("/");
       }
@@ -33,9 +33,9 @@ export const loginApi = (input, navigate) => {
     dispatch(loginRequest(input));
 
     try {
-      const user = await axios.post(`${BASICURL}/api/user/login`, input);
+      const user = await axios.post(`${BASICURL}/auth/login`, input);
       if (user?.data?.token) {
-        sessionStorage.setItem("token", user?.data?.token);
+        localStorage.setItem("token", user?.data?.token);
         dispatch(loginSuccess(user.data));
         navigate("/home");
       }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Dropdown.css";
-import arrow from "../../assets/arrow.svg";
+import arrow from "../../assets/Icons/arrow.svg";
 
 const Dropdown = ({ labelText, options }) => {
   const [show, setShow] = useState(false);

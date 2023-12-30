@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const BASICURL = "http://localhost:5000";
+export const BASICURL = "http://localhost:4000";
 
 export const axiosApi = axios.create({
   baseURL: BASICURL,
@@ -12,7 +12,7 @@ axiosApi.interceptors.request.use(function (config) {
 
   if (token) {
     config.headers["Authorization"] =
-      "Token " + localStorage.getItem("token");
+      "Bearer " + localStorage.getItem("token");
   } else {
     console.log("error");
   }

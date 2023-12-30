@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./ItemCard.css";
 import heart from "../../assets/Icons/heart-dark.svg";
+import laptop from "../../assets/Images/laptop.png";
 import { Rating } from "react-simple-star-rating";
 
 const ItemCard = () => {
@@ -29,8 +30,8 @@ const ItemCard = () => {
       </div>
       <div className="card_image_section">
         <img
-          src="https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          alt="Product Image"
+          src={laptop}
+          alt="Product_Image"
         />
       </div>
       <div className="card_content_section">

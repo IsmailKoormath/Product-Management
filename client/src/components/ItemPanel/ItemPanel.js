@@ -4,12 +4,19 @@ import BodyButton from "../BodyButton/BodyButton";
 import ItemCard from "../ItemCard/ItemCard";
 import CategoryModal from "../CategoryModal/CategoryModal";
 import ProductModal from "../ProductModal/ProductModal";
+import arrow from "../../assets/Icons/arrow.svg";
+import Pagination from '@mui/material/Pagination';
 
 const ItemPanel = () => {
   const [categoryModal, setCategoryModal] = useState(false);
   const [subCategoryModal, setSubCategoryModal] = useState(false);
   const [productModal, setProductModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = 10;
 
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
 
   const handleCategoryModal = () => {
     setCategoryModal(!categoryModal);
@@ -52,6 +59,18 @@ const ItemPanel = () => {
           <ItemCard />
           <ItemCard />
         </div>
+        <div className="pagination_container">
+          <h5 className="total_counts_text">10 of 456 items</h5>
+          <Pagination
+            color="warning"
+            count={totalPages}
+            page={currentPage}
+            onChange={handlePageChange}
+          />
+          <h6 className="showMore_text">
+            Show <span> 10 rows</span> <img src={arrow} alt="Arrow" />
+          </h6>
+        </div>
       </div>
       {categoryModal && (
         <CategoryModal
@@ -69,7 +88,7 @@ const ItemPanel = () => {
           placeholder={"Enter sub category name"}
         />
       )}
-      {productModal && <ProductModal handleClose={handleProductModal}/>}
+      {productModal && <ProductModal handleClose={handleProductModal} />}
     </>
   );
 };

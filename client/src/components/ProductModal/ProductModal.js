@@ -115,7 +115,7 @@ const ProductModal = ({ handleClose }) => {
             <label htmlFor="product" className="subCategoryLabel">
               sub category :
             </label>
-            <select value={} onChange={} name="" id="">
+            <select name="" id="">
               <option value="">Select sub category</option>
               <option value="">hello</option>
               <option value="">hai</option>

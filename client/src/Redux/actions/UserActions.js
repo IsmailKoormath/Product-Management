@@ -33,5 +33,5 @@ export const signUPSuccess = (user) => ({
 
 export const signUPFail = (error) => ({
   type: SIGNUP_FAIL,
-  payload: error.message,
+  payload: error?.message,
 });
