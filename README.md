@@ -3,7 +3,7 @@
 Welcome to our Product Management Application GitHub repository! This application<br> is built using the MERN (MongoDB, Express.js, React, Node.js) stack, providing a<br> robust and efficient solution for managing products.
 
 <h1>Features</h1>
-. <h3>Sign In/Sign Up</h3>: Users can securely sign in or create a new account to access the application.
+<h3>Sign In/Sign Up:</h3> Users can securely sign in or create a new account to access the application.
 
 <h3>Product CRUD Operations:</h3>
 . Add Product: Easily add new products to the system.
@@ -29,7 +29,7 @@ Users can create a wishlist of their favorite products for quick access.
 . MongoDB: A NoSQL database for storing product information.
 
 <h1>Getting Started</h1>
-. Clone the repository: git clone https://github.com/your-username/product-management.git
+. Clone the repository: git clone https://github.com/IsmailKoormath/product-management.git
 . Navigate to the project folder: cd product-management
 . Install dependencies:
    Frontend: cd client && npm install
