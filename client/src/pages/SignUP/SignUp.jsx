@@ -7,8 +7,13 @@ import user from "../../assets/Icons/user.svg"
 import mail from "../../assets/Icons/mail.svg"
 import lock from "../../assets/Icons/lock.svg"
 import CustomColorBotton from "../../components/CustomColoredButton/CustomColorBotton";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
+
+  const handleSignUp = (e) => {
+    e.preventDefault()
+  }
   return (
     <div className="signupPage">
       <div className="signup-leftSide">
@@ -18,7 +23,7 @@ const SignUp = () => {
           <br />
           login with your personal info
         </p>
-        <CustomBorderButton text={"SIGN IN"} />
+        <Link to='/'> <CustomBorderButton text={"SIGN IN"} /></Link>
       </div>
       <div className="signup-rightSide">
         <h1 className="createAccount">Create Account</h1>

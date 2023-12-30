@@ -2,6 +2,7 @@ import React from "react";
 import "./Header.css";
 import heart from "../../assets/Icons/heart-white.svg";
 import cart from "../../assets/Icons/shopping-cart.svg";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -19,7 +20,10 @@ const Header = () => {
           <img className="icon_image" src={heart} alt="Heart" />
           <div className="count">0</div>
         </div>
-        <p className="header_text">Sign in</p>
+        <Link to="/">
+          {" "}
+          <p className="header_text">Sign in</p>
+        </Link>
         <div className="icon_container">
           <img className="icon_image" src={cart} alt="Cart" />
           <div className="count">0</div>

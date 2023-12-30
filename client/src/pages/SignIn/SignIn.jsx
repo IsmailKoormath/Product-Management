@@ -5,6 +5,7 @@ import lock from "../../assets/Icons/lock.svg"
 import CustomColorBotton from '../../components/CustomColoredButton/CustomColorBotton'
 import CustomBorderButton from '../../components/CustomBorderbutton/CustomBorderButton'
 import "./SignIn.css"
+import { Link } from 'react-router-dom'
 
 const SignIn = () => {
     return (
@@ -21,7 +22,7 @@ const SignIn = () => {
             <div className='signin-rightside'>
                 <h1>Hello Friend!</h1>
                 <p>Enter your personal details and<br/> start your journey with us</p>
-                <CustomBorderButton text={"SIGN UP"}/>
+                <Link to='/signup'> <CustomBorderButton text={"SIGN UP"} /></Link> 
             </div>
 
         </div>
