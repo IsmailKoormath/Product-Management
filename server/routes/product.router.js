@@ -10,8 +10,8 @@ import express from "express";
 
 import { authorizeRoles } from "../middlewares/auth.middleware.js";
 import { ROLES } from "../constants/role.constants.js";
-import { upload } from "../src/utils/multer.util.js";
-import { productValidator } from "../middlewares/";
+import { upload } from "../utils/multer.util.js";
+import { productValidator } from "../middlewares/product.middleware.js";
 
 const router = express.Router();
 const path = "/product";

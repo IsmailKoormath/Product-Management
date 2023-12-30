@@ -1,6 +1,6 @@
 import mongoose, { Schema, model } from "mongoose";
 import { ROLES } from "../constants/role.constants.js";
-import { isValidEmail } from "../src/utils/email.regex.js";
+import { isValidEmail } from "../utils/email.regex.js";
 
 export const userSchema = new Schema({
   name: {
