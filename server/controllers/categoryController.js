@@ -12,9 +12,7 @@ export async function saveCategory(req, res, next) {
 
 export async function getAllCategory(req, res, next) {
   try {
-    const page = req.query.page;
-    const limit = req.query.limit || "10";
-    const result = await getAll(page, limit);
+    const result = await getAll();
     res.status(200).send(result);
   } catch (err) {
     next(err);

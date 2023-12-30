@@ -7,11 +7,8 @@ export async function save(data) {
   return { category };
 }
 
-export async function getAll(page, limit) {
-  const category = await categoryModel
-    .find()
-    .skip((toNumber(page) - 1) * toNumber(limit))
-    .limit(toNumber(limit));
+export async function getAll() {
+  const category = await categoryModel.find();
   const total = await categoryModel.find().countDocuments();
   return { category, total };
 }
