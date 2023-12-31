@@ -16,12 +16,12 @@ import {
 
 // add new product
 
-export const addProductApi = (input) => {
+export const addProductApi = (productData) => {
   return async (dispatch) => {
-    dispatch(addProductRequest(input));
+    dispatch(addProductRequest());
 
     try {
-      const product = await axiosApi.post(`/product/create`, input);
+      const product = await axiosApi.post(`/product/create`, productData);
       console.log(product);
       dispatch(addProductSuccess(product.data));
     } catch (error) {

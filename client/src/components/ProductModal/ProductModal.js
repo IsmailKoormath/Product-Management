@@ -10,21 +10,26 @@ import { getallSubCategoryApi } from "../../Redux/api/subCategoryApi";
 import { addProductApi } from "../../Redux/api/productApi";
 import { map } from "lodash";
 
-const ProductModal = ({ handleClose,heading }) => {
+const ProductModal = ({ handleClose, heading }) => {
   const [count, setCount] = useState(1);
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const [formData, setFormData] = useState({
+  // const [subcategory, setSubCategory] = useState({
+  //   subcategoryId: "",
+  //   subcategoryName: "",
+  // });
+  // console.log(subcategory);
+  const [data, setData] = useState({
     title: "",
     ram: "",
     price: "",
     totalProductCount: count,
+    description: "",
     subcategory: {
       subcategoryId: "",
       subcategoryName: "",
     },
-    description: "",
   });
-  console.log(formData);
+  console.log(data);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -48,7 +53,6 @@ const ProductModal = ({ handleClose,heading }) => {
 
     // Check if the limit is reached
     if (selectedFiles.length + filesArray.length <= 3) {
-      // Update the state with the selected files
       setSelectedFiles((prevFiles) => [...prevFiles, ...filesArray]);
     } else {
       alert("You can only pick up to 3 images.");
@@ -57,7 +61,7 @@ const ProductModal = ({ handleClose,heading }) => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormData((prevData) => ({
+    setData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
@@ -70,20 +74,25 @@ const ProductModal = ({ handleClose,heading }) => {
   };
 
   const handleFormSubmit = async () => {
-    const formDataWithFiles = new FormData();
+    const product = new FormData();
+     selectedFiles.forEach((image, index) => {
+    product.append('product', image, image.name);
+  });
+    product.append("title", data.title);
+    product.append("ram", data.ram);
+    product.append("price", data.price);
+    product.append("totalProductCount", data.totalProductCount);
+    product.append("description", data.description);
+    product.append(
+      "subcategory[subcategoryId]",
+      data.subcategory.subcategoryId
+    );
+    console.log(product);
 
-    // Append existing form data fields
-    Object.entries(formData).forEach(([key, value]) => {
-      formDataWithFiles.append(key, value);
-    });
-
-    // Append each selected file to the FormData object
-    // selectedFiles.forEach((file, index) => {
-    formDataWithFiles.append(`productImages`, selectedFiles);
-    // });
-
-    dispatch(addProductApi(formDataWithFiles));
+    dispatch(addProductApi(product));
   };
+
+  
 
   const hideFilePicker = selectedFiles.length >= 3;
 
@@ -148,12 +157,12 @@ const ProductModal = ({ handleClose,heading }) => {
               sub category :
             </label>
             <select
-              value={formData?.subcategory?.subcategoryId}
+              value={data?.subcategory?.subcategoryId}
               onChange={(e) =>
-                setFormData({
-                  ...formData,
+                setData({
+                  ...data,
                   subcategory: {
-                    ...formData.subcategory,
+                    ...data.subcategory,
                     subcategoryId: e.target.value,
                     subcategoryName:
                       e.target.options[e.target.selectedIndex].text,
@@ -210,7 +219,10 @@ const ProductModal = ({ handleClose,heading }) => {
           </div>
         </form>
         <div className="button_container">
-          <AddButton text={heading==='Edit Product' ?'Edit':'Add'} onClick={handleFormSubmit} />
+          <AddButton
+            text={heading === "Edit Product" ? "Edit" : "Add"}
+            onClick={handleFormSubmit}
+          />
           <DiscardButton onClick={handleClose} />
         </div>
       </div>

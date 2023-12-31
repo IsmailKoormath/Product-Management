@@ -7,7 +7,8 @@ const { toNumber } = lodash;
 
 export async function saveProduct(productData, files) {
   const productImages = [];
-
+console.log(productData);
+console.log(files);
   for (const fileType in files) {
     if (Object.prototype.hasOwnProperty.call(files, fileType)) {
       const fileList = files[fileType]; // Get the array of files for the current type
