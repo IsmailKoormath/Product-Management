@@ -7,15 +7,22 @@ import { addCategory } from "../../Redux/api/categoryApi";
 import { addSubCategoryApi } from "../../Redux/api/subCategoryApi";
 
 const CategoryModal = ({ handleClose, heading, placeholder }) => {
-  const [category, setCategory] = useState('')
-  const [subcategory, setSubCategory] = useState({
+
+  const [category, setCategory] = useState({
+    categoryName: ""
+  })
+  const [subCategory, setSubCategory] = useState({
     categoryId: "",
-    subcategoryName: "",
-  });
+    subcategoryName: ""
+  })
+  // const [data, setData] = useState({
+  //   category: "",
+  //   subCateogry: "",
+  // });
   const { getcategory } = useSelector((state) => state.categoryReducer);
 
 
-  console.log(setCategory);
+  console.log(subCategory);
 
   const dispatch = useDispatch();
   // add new category
@@ -25,7 +32,7 @@ const CategoryModal = ({ handleClose, heading, placeholder }) => {
 
   //add new subcategory
   const addSubCategory = () => {
-    dispatch(addSubCategoryApi(subcategory))
+    dispatch(addSubCategoryApi(subCategory))
   }
   return (
     <div className="categoryModal_main">
@@ -34,12 +41,8 @@ const CategoryModal = ({ handleClose, heading, placeholder }) => {
         <form action="" className="categoryModal_form">
           {heading === "Add Sub Category" && (
             <select
-              onChange={(e) =>
-                setSubCategory({
-                  ...subcategory,
-                  categoryId: e.target.value,
-                })
-              }
+              value={subCategory.categoryId}
+              onChange={(e) => setSubCategory({ ...subCategory, categoryId: e.target.value })}
               name=""
               id=""
               className="categoryModal_selector"
@@ -57,13 +60,11 @@ const CategoryModal = ({ handleClose, heading, placeholder }) => {
             type="text"
             placeholder={placeholder}
             className="categoryModal_input"
-            onChange={heading === "Add Sub Category" ? (e) =>
-              setSubCategory({
-                ...subcategory, subcategoryName:
-                  e.target.value
-              }) : (e) => setCategory({
-                ...category, categoryName: e.target.value
-              })}
+            value={
+              heading === "Add Sub Category" ? subCategory.subcategoryName : category.categoryName
+            }
+
+            onChange={heading === "Add Sub Category" ? (e) => setSubCategory({ ...subCategory, subcategoryName: e.target.value }) : (e) => setCategory({ ...category, categoryName: e.target.value })}
           />
         </form>
         <div className="button_container">
@@ -88,3 +89,6 @@ const CategoryModal = ({ handleClose, heading, placeholder }) => {
 };
 
 export default CategoryModal;
+
+
+
