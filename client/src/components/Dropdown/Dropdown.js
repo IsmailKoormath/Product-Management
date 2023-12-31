@@ -1,12 +1,23 @@
 import React, { useState } from "react";
 import "./Dropdown.css";
 import arrow from "../../assets/Icons/arrow.svg";
+import { getallSubCategory } from "../../Redux/api/subCategoryApi";
+import { useDispatch, useSelector } from "react-redux";
+import { map } from "lodash";
 
-const Dropdown = ({ labelText, options }) => {
+const Dropdown = ({ labelText, id }) => {
   const [show, setShow] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
 
-  const handleShowOptions = () => {
+  const { getsubcategory } = useSelector((state) => state.subcategoryReducer)
+
+
+  console.log(getsubcategory);
+
+  const dispatch = useDispatch();
+
+  const handleShowOptions = (id) => {
+    dispatch(getallSubCategory(id));
     setShow(!show);
   };
 
@@ -25,7 +36,7 @@ const Dropdown = ({ labelText, options }) => {
 
   return (
     <>
-      <div className="dropdown_main" onClick={handleShowOptions}>
+      <div className="dropdown_main" onClick={()=>handleShowOptions(id)}>
         {labelText}
         <img
           src={arrow}
@@ -35,15 +46,17 @@ const Dropdown = ({ labelText, options }) => {
       </div>
       {show && (
         <div className="options_container">
-          {options?.map((option) => (
-            <div key={option} className="checkbox-wrapper-13">
+          {map(getsubcategory?.subcategory,(sub) => (
+            <div key={sub._id} className="checkbox-wrapper-13">
               <input
                 type="checkbox"
-                id={`checkbox-${option}`}
-                checked={selectedOptions.includes(option)}
-                onChange={() => handleCheckboxChange(option)}
+                id={`checkbox-${sub._id}`}
+                checked={selectedOptions.includes(sub.subcategoryName)}
+                onChange={() => handleCheckboxChange(sub.subcategoryName)}
               />
-              <label htmlFor={`checkbox-${option}`}>{option}</label>
+              <label htmlFor={`checkbox-${sub.subcategoryName}`}>
+                {sub.subcategoryName}
+              </label>
             </div>
           ))}
         </div>

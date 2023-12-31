@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ItemPanel.css";
 import BodyButton from "../BodyButton/BodyButton";
 import ItemCard from "../ItemCard/ItemCard";
 import CategoryModal from "../CategoryModal/CategoryModal";
 import ProductModal from "../ProductModal/ProductModal";
 import arrow from "../../assets/Icons/arrow.svg";
-import Pagination from '@mui/material/Pagination';
+import Pagination from "@mui/material/Pagination";
+import { useDispatch, useSelector } from "react-redux";
 
 const ItemPanel = () => {
   const [categoryModal, setCategoryModal] = useState(false);
@@ -13,6 +14,10 @@ const ItemPanel = () => {
   const [productModal, setProductModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 10;
+
+
+
+  const dispatch = useDispatch();
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);

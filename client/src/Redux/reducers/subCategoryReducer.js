@@ -1,29 +1,29 @@
-import { ADDCATEGORY_FAIL, ADDCATEGORY_REQUEST, ADDCATEGORY_SUCCESS, CATEGORY_FAIL, CATEGORY_REQUEST, CATEGORY_SUCCESS, GETCATEGORY_FAIL, GETCATEGORY_REQUEST, GETCATEGORY_SUCCESS } from "../ActionTypes";
+import { ADDSUBCATEGORY_FAIL, ADDSUBCATEGORY_REQUEST, ADDSUBCATEGORY_SUCCESS, GETSUBCATEGORY_FAIL, GETSUBCATEGORY_REQUEST, GETSUBCATEGORY_SUCCESS } from "../ActionTypes";
 
 const initiailState = {
   loding: false,
   error: "",
-  category: {},
-  getcategory:[]
+  subcategory: {},
+  getsubcategory: [],
 };
-const categoryReducer = (state = initiailState, action) => {
+const subcategoryReducer = (state = initiailState, action) => {
   switch (action.type) {
     // add category
 
-    case ADDCATEGORY_REQUEST:
+    case ADDSUBCATEGORY_REQUEST:
       return {
         ...state,
         loding: true,
       };
 
-    case ADDCATEGORY_SUCCESS:
+    case ADDSUBCATEGORY_SUCCESS:
       return {
         ...state,
         loding: false,
-        category: action.payload,
+        subcategory: action.payload,
       };
 
-    case ADDCATEGORY_FAIL:
+    case ADDSUBCATEGORY_FAIL:
       return {
         ...state,
         loding: false,
@@ -32,20 +32,20 @@ const categoryReducer = (state = initiailState, action) => {
 
     // get category
 
-    case GETCATEGORY_REQUEST:
+    case GETSUBCATEGORY_REQUEST:
       return {
         ...state,
         loding: true,
       };
 
-    case GETCATEGORY_SUCCESS:
+    case GETSUBCATEGORY_SUCCESS:
       return {
         ...state,
         loding: false,
-        getcategory: action.payload,
+        getsubcategory: action.payload,
       };
 
-    case GETCATEGORY_FAIL:
+    case GETSUBCATEGORY_FAIL:
       return {
         ...state,
         loding: false,
@@ -56,4 +56,4 @@ const categoryReducer = (state = initiailState, action) => {
       return state;
   }
 };
-export default categoryReducer
+export default subcategoryReducer;

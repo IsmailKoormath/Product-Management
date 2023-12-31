@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { map } from "lodash";
+
 import "./Sidebar.css";
 import arrow from "../../assets/Icons/arrow.svg";
 import Dropdown from "../Dropdown/Dropdown";
+import { useDispatch, useSelector } from "react-redux";
+import { getallCategory } from "../../Redux/api/categoryApi";
 
 const Sidebar = () => {
+  const { getcategory, getsubcategory } = useSelector((state) => ({
+    getcategory: state.categoryReducer.getcategory,
+    getsubcategory: state.subcategoryReducer.getsubcategory,
+  }));
+
+  console.log(getsubcategory);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getallCategory());
+  },[]);
+
   return (
     <div className="sidebar_main">
       <div className="home_container">
@@ -13,10 +29,14 @@ const Sidebar = () => {
       <div>
         <p className="categories_text">Categories</p>
         <p className="allCategories_text">All categories</p>
-
-        <Dropdown labelText={"Laptop"} options={["HP", "Dell"]} />
-        <Dropdown labelText={"Tablet"} options={["HP", "Dell"]} />
-        <Dropdown labelText={"Headphones"} options={["HP", "Dell"]} />
+        {map(getcategory.category, (category) => (
+          <Dropdown
+            key={category._id}
+            labelText={category.categoryName}
+            id={category._id}
+            // options={["HP", "Dell"]}
+          />
+        ))}
 
       </div>
     </div>
