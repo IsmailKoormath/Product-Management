@@ -15,18 +15,25 @@ const ItemPanel = () => {
   const [subCategoryModal, setSubCategoryModal] = useState(false);
   const [productModal, setProductModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 10;
+
+    const dispatch = useDispatch();
+
 
   const { AllProducts } = useSelector((state) => state.productReducer);
-
-  const dispatch = useDispatch();
   console.log(AllProducts);
-  useEffect(() => {
-    dispatch(getAllProductsApi());
-  }, [dispatch]);
 
-  const handlePageChange = (event, value) => {
-    setCurrentPage(value);
+    const limitPerPage = 5;
+     let NumProducts = AllProducts?.total;
+  const NumPage = Math.ceil(NumProducts / limitPerPage);
+ 
+  
+  useEffect(() => {
+    dispatch(getAllProductsApi({ currentPage, limitPerPage }));
+  }, [currentPage]);
+
+  const handlePageChange = (e,p) => {
+    console.log("value", p);
+    setCurrentPage(p);
   };
 
   const handleCategoryModal = () => {
@@ -70,10 +77,12 @@ const ItemPanel = () => {
           ))}
         </div>
         <div className="pagination_container">
-          <h5 className="total_counts_text">10 of 456 items</h5>
+          <h5 className="total_counts_text">
+            {limitPerPage} of {NumProducts} items
+          </h5>
           <Pagination
             color="warning"
-            count={totalPages}
+            count={NumPage}
             page={currentPage}
             onChange={handlePageChange}
           />
