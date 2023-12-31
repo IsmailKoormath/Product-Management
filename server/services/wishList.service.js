@@ -20,5 +20,6 @@ export async function findAllUserWishList(userId) {
     .find({ userId })
     .populate("productId")
     .sort({ createdAt: -1 });
+    
   return { wishList };
 }

@@ -1,8 +1,8 @@
-import { model, Schema } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 
 const WishlistSchema = new Schema({
   productId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "Product",
   },
   userId: {

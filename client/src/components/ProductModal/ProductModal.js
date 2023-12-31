@@ -7,8 +7,9 @@ import arrow from "../../assets/Icons/arrow.svg";
 import crossIcon from "../../assets/Icons/cross-icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { getallSubCategoryApi } from "../../Redux/api/subCategoryApi";
-import { addProductApi } from "../../Redux/api/productApi";
+import { addProductApi, editProductApi } from "../../Redux/api/productApi";
 import { map } from "lodash";
+import { useParams } from "react-router-dom";
 
 const ProductModal = ({ handleClose, heading }) => {
   const [count, setCount] = useState(1);
@@ -31,6 +32,8 @@ const ProductModal = ({ handleClose, heading }) => {
   });
   console.log(data);
   const dispatch = useDispatch();
+  const params = useParams();
+  const productId = params.id;
 
   useEffect(() => {
     dispatch(getallSubCategoryApi());
@@ -88,7 +91,9 @@ const ProductModal = ({ handleClose, heading }) => {
       data.subcategory.subcategoryId
     );
     console.log(product);
-
+    if(heading === "Edit Product"){
+dispatch(editProductApi(product, productId));
+   }
     dispatch(addProductApi(product));
   };
 
@@ -221,7 +226,7 @@ const ProductModal = ({ handleClose, heading }) => {
         <div className="button_container">
           <AddButton
             text={heading === "Edit Product" ? "Edit" : "Add"}
-            onClick={handleFormSubmit}
+            onClick={(e) => {handleFormSubmit();handleClose()}}
           />
           <DiscardButton onClick={handleClose} />
         </div>

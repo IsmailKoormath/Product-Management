@@ -14,9 +14,12 @@ export const managewishlistApi = (productId) => {
   return async (dispatch) => {
     dispatch(addwishlistRequest(productId));
     try {
-      const wishList = await axiosApi.post(`/wishlist/new`, productId);
+      const wishList = await axiosApi.post(`/wishlist/new`, {
+        productId: productId,
+      });
       console.log(wishList);
-      dispatch(addwishlistSuccess(wishList.data));
+      await dispatch(addwishlistSuccess(wishList.data));
+      dispatch(getallwishlistApi());
     } catch (error) {
       console.log(error);
       dispatch(addwishlistFail(error?.response));

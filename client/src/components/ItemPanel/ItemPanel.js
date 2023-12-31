@@ -9,7 +9,6 @@ import arrow from "../../assets/Icons/arrow.svg";
 import Pagination from "@mui/material/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProductsApi } from "../../Redux/api/productApi";
-import { Link } from "react-router-dom";
 
 const ItemPanel = () => {
   const [categoryModal, setCategoryModal] = useState(false);
@@ -21,7 +20,7 @@ const ItemPanel = () => {
   const { AllProducts } = useSelector((state) => state.productReducer);
 
   const dispatch = useDispatch();
-
+  console.log(AllProducts);
   useEffect(() => {
     dispatch(getAllProductsApi());
   }, [dispatch]);
@@ -66,10 +65,8 @@ const ItemPanel = () => {
           />
         </div>
         <div className="panel_card_container">
-          {map(AllProducts, (product) => (
-            <Link to={`/productdetails/:id`}>
-              <ItemCard product={product} />
-            </Link>
+          {map(AllProducts.product, (product) => (
+            <ItemCard product={product} />
           ))}
         </div>
         <div className="pagination_container">

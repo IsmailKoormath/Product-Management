@@ -17,7 +17,7 @@ const WishList = ({ handleCancel }) => {
     dispatch(getallwishlistApi());
   }, []);
 
-  console.log(AllWishlist);
+  console.log("wish",AllWishlist.wishList);
   const removeFromWishlist=(productId)=>{
     dispatch(managewishlistApi(productId));
   }
@@ -55,15 +55,21 @@ const WishList = ({ handleCancel }) => {
             />
           </svg>
         </div>
-        {map(AllWishlist, (prod) => (
-          <div className="wishList_card_container">
+
+        <div className="wishList_card_container">
+          {map(AllWishlist.wishList, (wish) => (
             <div className="wishList_card">
               <div className="wishList_card_image_container">
-                <img src="" alt="Product" />
+                <img
+                  src={wish?.productId?.productImages?.[0]?.url}
+                  alt="Product"
+                />
               </div>
               <div>
-                <h4 className="wishList_card_text">Tablet as a laptop</h4>
-                <h5 className="wishList_card_amount_text">$11,70</h5>
+                <h4 className="wishList_card_text">{wish?.productId?.title}</h4>
+                <h5 className="wishList_card_amount_text">
+                  ${wish?.productId?.price}
+                </h5>
                 <Rating
                   size={22}
                   onClick={handleRating}
@@ -74,14 +80,14 @@ const WishList = ({ handleCancel }) => {
                 />
               </div>
               <img
-                onClick={()=>removeFromWishlist()}
+                onClick={() => removeFromWishlist()}
                 src={removeIcon}
                 alt="Remove Icon"
                 className="whishlist_remove_icon"
               />
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
       <div className="wishlistCloser" onClick={handleCancel}></div>
     </div>

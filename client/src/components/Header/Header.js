@@ -1,24 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css";
 import heart from "../../assets/Icons/heart-white.svg";
 import cart from "../../assets/Icons/shopping-cart.svg";
 import { Link } from "react-router-dom";
 import WishList from "../WishList/WishList";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllProductsApi } from "../../Redux/api/productApi";
+import { getallwishlistApi } from "../../Redux/api/wishlistApi";
 
 const Header = () => {
   const [showWishlist, setShowWishlist] = useState(false);
   const [title, setTitle] = useState("");
+
+  const { AllWishlist } = useSelector((state) => state.wishlistReducer);
+ let length = AllWishlist.wishList.length;
+console.log(length);
 
   const dispatch = useDispatch();
 
   const handleShowwishlist = () => {
     setShowWishlist(!showWishlist);
   };
-  const handleSearchProduct = () => {
+  const handleSearchProduct = (e) => {
+    e.preventDefault()
     dispatch(getAllProductsApi(title));
   };
+
   return (
     <>
       <header className="header_main">
@@ -36,7 +43,7 @@ const Header = () => {
         <div className="second_section">
           <div className="icon_container" onClick={handleShowwishlist}>
             <img className="icon_image" src={heart} alt="Heart" />
-            <div className="count">0</div>
+            <div className="count">{length}</div>
           </div>
           <Link to="/">
             {" "}

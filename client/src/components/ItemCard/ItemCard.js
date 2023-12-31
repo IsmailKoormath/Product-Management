@@ -4,7 +4,11 @@ import heart from "../../assets/Icons/heart-dark.svg";
 import laptop from "../../assets/Images/laptop.png";
 import { Rating } from "react-simple-star-rating";
 import { useDispatch } from "react-redux";
-import { getallwishlistApi } from "../../Redux/api/wishlistApi";
+import {
+  getallwishlistApi,
+  managewishlistApi,
+} from "../../Redux/api/wishlistApi";
+import { Link } from "react-router-dom";
 
 const ItemCard = ({ product }) => {
   const [favourite, setFavourite] = useState(false);
@@ -19,8 +23,9 @@ const ItemCard = ({ product }) => {
 
   const dispatch = useDispatch();
 
-  const handleFavourite = (productId) => {
-    dispatch(getallwishlistApi(productId));
+  const handleFavourite = (e, productId) => {
+    e.preventDefault();
+    dispatch(managewishlistApi(productId));
     setFavourite(!favourite);
   };
 
@@ -28,25 +33,27 @@ const ItemCard = ({ product }) => {
     <div className="itemCard_main">
       <div
         className={favourite ? "heart_container favourited" : "heart_container"}
-        onClick={handleFavourite}
+        onClick={(e) => handleFavourite(e)}
       >
         <img src={heart} alt="Heart" />
       </div>
       <div className="card_image_section">
-        <img src={laptop} alt="Product_Image" />
+        <img src={product?.productImages[0]?.url} alt="Product_Image" />
       </div>
-      <div className="card_content_section">
-        <h4 className="item_name">Tablet as a laptop</h4>
-        <h5 className="item_price">$11,70</h5>
-        <Rating
-          size={25}
-          onClick={handleRating}
-          onPointerEnter={onPointerEnter}
-          onPointerLeave={onPointerLeave}
-          onPointerMove={onPointerMove}
-          /* Available Props */
-        />
-      </div>
+      <Link to={`/productdetails/${product._id}`}>
+        <div className="card_content_section">
+          <h4 className="item_name">{product.title}</h4>
+          <h5 className="item_price">${product.price}</h5>
+          <Rating
+            size={25}
+            onClick={handleRating}
+            onPointerEnter={onPointerEnter}
+            onPointerLeave={onPointerLeave}
+            onPointerMove={onPointerMove}
+            /* Available Props */
+          />
+        </div>
+      </Link>
     </div>
   );
 };

@@ -38,7 +38,7 @@ export const getAllProductsApi = (title) => {
     dispatch(getProductRequest());
 
     try {
-      const products = await axiosApi.get(`/product/all?title=${title}`);
+      const products = await axiosApi.get(`/product/all?search=${title?title:''}`);
       console.log(products);
       dispatch(getProductSuccess(products.data));
     } catch (error) {
@@ -65,12 +65,15 @@ export const getSingleProductApi = (productId) => {
 };
 // edit product
 
-export const editProductApi = (productId) => {
+export const editProductApi = (productData, productId) => {
   return async (dispatch) => {
     dispatch(editProductRequest(productId));
 
     try {
-      const product = await axiosApi.put(`/product/single/${productId}`);
+      const product = await axiosApi.put(
+        `/product/update/${productId}`,
+        productData
+      );
       console.log(product);
       dispatch(editProductSuccess(product.data));
     } catch (error) {

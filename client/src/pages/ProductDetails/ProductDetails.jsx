@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getSingleProductApi } from '../../Redux/api/productApi'
 import ProductModal from '../../components/ProductModal/ProductModal'
+import { getallwishlistApi, managewishlistApi } from '../../Redux/api/wishlistApi'
 
 const ProductDetails = () => {
   const [wishlist, setWishlist] = useState(false)
@@ -22,22 +23,24 @@ const ProductDetails = () => {
   const params = useParams();
   const productId = params.id;
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getSingleProductApi(productId))
-  },[])
-
+  }, [])
+  console.log(singleProduct);
   // for wish list handle
   const handleWishlist = () => {
+    dispatch(managewishlistApi(productId));
+
     setWishlist(!wishlist)
   }
 
   // couter functions
   const increment = () => {
-    setCount(count+1)
+    setCount(count + 1)
   }
   const decrement = () => {
-    if(count>1)
-    setCount(count-1)
+    if (count > 1)
+      setCount(count - 1)
   }
 
   const handleProductModal = () => {
@@ -53,20 +56,19 @@ const ProductDetails = () => {
       </div>
       <div className='productDetailspage'>
         <div className='productImages'>
-          <div className='productMainImage'><img src={laptop} alt='product' /></div>
+          <div className='productMainImage'><img src={singleProduct?.product?.productImages[0]?.url} alt='product' /></div>
           <div className='moreImages'>
-            <div className='otherImages'><img src={laptop} alt='product' /></div>
-            <div className='otherImages'><img src={laptop} alt='product' /></div>
+            <div className='otherImages'><img src={singleProduct?.product?.productImages[1]?.url} alt='product' /></div>
+            <div className='otherImages'><img src={singleProduct?.product?.productImages[2]?.url} alt='product' /></div>
           </div>
         </div>
         <div className='productsDetails'>
-          <h3 className='productName'>Tablet as a laptop</h3>
-          <h3 className='productPrice'>$11,70</h3>
+          <h3 className='productName'>{singleProduct?.product?.title}</h3>
+          <h3 className='productPrice'>${singleProduct?.product?.price}</h3>
           <span className='availability'>Availability: <img src={tick} alt="" /><span> In stock</span></span>
-          <p>Hurry up! only 34 product left in stock!</p>
+          <p>Hurry up! only {singleProduct?.product?.totalProductCount} product left in stock!</p>
           <div className='line'></div>
-          <p className='ram'>Ram: <div className='ramSize'>4 GB</div><div className='ramSize'>8 GB</div><div className='ramSize'>16
-            GB</div></p>
+          <p className='ram'>Ram: <div className='ramSize'>{singleProduct?.product?.ram} GB</div></p>
           <p className='quantity'>Quantity:<div className='counter'>
             <button onClick={decrement} className='operator'>-</button>
             <span className='productcount'>{count}</span>
