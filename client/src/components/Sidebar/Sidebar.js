@@ -13,7 +13,6 @@ const Sidebar = () => {
     getsubcategory: state.subcategoryReducer.getsubcategory,
   }));
 
-  console.log(getsubcategory);
 
   const dispatch = useDispatch();
   useEffect(() => {

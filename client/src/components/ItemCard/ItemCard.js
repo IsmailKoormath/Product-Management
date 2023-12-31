@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import "./ItemCard.css";
 import heart from "../../assets/Icons/heart-dark.svg";
-import laptop from "../../assets/Images/laptop.png";
 import { Rating } from "react-simple-star-rating";
 import { useDispatch } from "react-redux";
 import {
-  getallwishlistApi,
   managewishlistApi,
 } from "../../Redux/api/wishlistApi";
 import { Link } from "react-router-dom";
@@ -14,6 +12,8 @@ const ItemCard = ({ product }) => {
   const [favourite, setFavourite] = useState(false);
   const [rating, setRating] = useState(0);
 
+    const dispatch = useDispatch();
+
   const handleRating = (rate) => {
     setRating(rate);
   };
@@ -21,10 +21,9 @@ const ItemCard = ({ product }) => {
   const onPointerLeave = () => console.log("Leave");
   const onPointerMove = (value, index) => console.log(value, index);
 
-  const dispatch = useDispatch();
-
-  const handleFavourite = (e, productId) => {
-    e.preventDefault();
+  // handle wishlist
+  const handleFavourite = (productId) => {
+    console.log("productid", productId);
     dispatch(managewishlistApi(productId));
     setFavourite(!favourite);
   };
@@ -33,7 +32,7 @@ const ItemCard = ({ product }) => {
     <div className="itemCard_main">
       <div
         className={favourite ? "heart_container favourited" : "heart_container"}
-        onClick={(e) => handleFavourite(e)}
+        onClick={(e) => handleFavourite(product._id)}
       >
         <img src={heart} alt="Heart" />
       </div>
@@ -50,7 +49,6 @@ const ItemCard = ({ product }) => {
             onPointerEnter={onPointerEnter}
             onPointerLeave={onPointerLeave}
             onPointerMove={onPointerMove}
-            /* Available Props */
           />
         </div>
       </Link>

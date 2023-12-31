@@ -22,7 +22,6 @@ export const addProductApi = (productData) => {
 
     try {
       const product = await axiosApi.post(`/product/create`, productData);
-      console.log(product);
       dispatch(addProductSuccess(product.data));
     } catch (error) {
       console.log(error);
@@ -43,7 +42,6 @@ export const getAllProductsApi = ({ title, currentPage, limitPerPage }) => {
           title ? title : ""
         }&&page=${currentPage}&&limit=${limitPerPage}`
       );
-      console.log(products);
       dispatch(getProductSuccess(products.data));
     } catch (error) {
       console.log(error);
@@ -59,7 +57,6 @@ export const getSingleProductApi = (productId) => {
 
     try {
       const product = await axiosApi.get(`/product/single/${productId}`);
-      console.log(product);
       dispatch(singleProductSuccess(product.data));
     } catch (error) {
       console.log(error);
@@ -78,7 +75,6 @@ export const editProductApi = (productData, productId) => {
         `/product/update/${productId}`,
         productData
       );
-      console.log(product);
       dispatch(editProductSuccess(product.data));
     } catch (error) {
       console.log(error);

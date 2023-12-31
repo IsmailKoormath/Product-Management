@@ -17,7 +17,6 @@ export const addSubCategoryApi = (input) => {
 
     try {
       const subcategory = await axiosApi.post(`/subcategory/new`, input);
-      console.log(subcategory);
       dispatch(AddsubCategorySuccess(subcategory.data));
     } catch (error) {
       console.log(error);
@@ -34,7 +33,6 @@ export const getallSubCategoryApi = () => {
 
     try {
       const subcategory = await axiosApi.get(`/subcategory/all`);
-      console.log(subcategory);
       dispatch(getAllSubCategorySuccess(subcategory.data));
     } catch (error) {
       console.log(error);
@@ -53,7 +51,6 @@ export const getSubCategoryApi = (categoryid) => {
       const subcategory = await axiosApi.get(
         `/subcategory/all?categoryId=${categoryid}`
       );
-      console.log(subcategory);
       dispatch(getSubCategorySuccess(subcategory.data));
     } catch (error) {
       console.log(error);

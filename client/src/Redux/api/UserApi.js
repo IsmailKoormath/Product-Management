@@ -12,7 +12,6 @@ export const signUpApi = (input, navigate) => {
 
     try {
       const user = await axios.post(`${BASICURL}/auth/signup`, input);
-      console.log(user);
       if (user?.data?.message === `user registered successfully with email ${input.email}`) {
         dispatch(signUPSuccess(user.data));
         navigate("/");

@@ -11,9 +11,6 @@ const Dropdown = ({ labelText, id }) => {
 
   const { getsubcategory } = useSelector((state) => state.subcategoryReducer)
 
-
-  console.log(getsubcategory);
-
   const dispatch = useDispatch();
 
   const handleShowOptions = (id) => {
@@ -31,8 +28,6 @@ const Dropdown = ({ labelText, id }) => {
       setSelectedOptions(newSelectedOptions);
     }
   };
-
-  console.log(selectedOptions);
 
   return (
     <>

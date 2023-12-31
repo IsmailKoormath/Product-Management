@@ -16,7 +16,6 @@ export const addCategory = (input) => {
 
     try {
       const category = await axiosApi.post(`/category/new`, input);
-      console.log(category);
       if (category?.data?.messagge === "successfully added category") {
         dispatch(AddCategorySuccess(category.data));
       }
@@ -36,7 +35,6 @@ export const getallCategory = () => {
 
     try {
       const category = await axiosApi.get(`/category/all`,);
-      console.log(category);
         dispatch(getCategorySuccess(category.data));
       
     } catch (error) {

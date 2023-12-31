@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import tick from '../../assets/Icons/tick.svg'
-import laptop from '../../assets/Images/laptop.png'
 import './ProductDetails.css'
 import Header from '../../components/Header/Header'
 
@@ -10,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getSingleProductApi } from '../../Redux/api/productApi'
 import ProductModal from '../../components/ProductModal/ProductModal'
-import { getallwishlistApi, managewishlistApi } from '../../Redux/api/wishlistApi'
+import { managewishlistApi } from '../../Redux/api/wishlistApi'
 
 const ProductDetails = () => {
   const [wishlist, setWishlist] = useState(false)

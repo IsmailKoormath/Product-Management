@@ -13,8 +13,7 @@ const Header = () => {
   const [title, setTitle] = useState("");
 
   const { AllWishlist } = useSelector((state) => state.wishlistReducer);
- let length = AllWishlist?.wishList?.length;
-console.log(length);
+  let length = AllWishlist?.wishList?.length;
 
   const dispatch = useDispatch();
 
@@ -22,9 +21,12 @@ console.log(length);
     setShowWishlist(!showWishlist);
   };
   const handleSearchProduct = (e) => {
-    e.preventDefault()
-    dispatch(getAllProductsApi({title}));
+    e.preventDefault();
+    dispatch(getAllProductsApi({ title }));
   };
+  useEffect(() => {
+    dispatch(getallwishlistApi());
+  }, []);
 
   return (
     <>

@@ -20,19 +20,16 @@ const ItemPanel = () => {
 
 
   const { AllProducts } = useSelector((state) => state.productReducer);
-  console.log(AllProducts);
 
     const limitPerPage = 5;
      let NumProducts = AllProducts?.total;
   const NumPage = Math.ceil(NumProducts / limitPerPage);
- 
   
   useEffect(() => {
     dispatch(getAllProductsApi({ currentPage, limitPerPage }));
   }, [currentPage]);
 
   const handlePageChange = (e,p) => {
-    console.log("value", p);
     setCurrentPage(p);
   };
 
@@ -73,7 +70,7 @@ const ItemPanel = () => {
         </div>
         <div className="panel_card_container">
           {map(AllProducts.product, (product) => (
-            <ItemCard product={product} />
+            <ItemCard key={product._id} product={product} />
           ))}
         </div>
         <div className="pagination_container">

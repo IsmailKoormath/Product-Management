@@ -58,7 +58,7 @@ const WishList = ({ handleCancel }) => {
 
         <div className="wishList_card_container">
           {map(AllWishlist.wishList, (wish) => (
-            <div className="wishList_card">
+            <div className="wishList_card" key={wish?.productId?._id}>
               <div className="wishList_card_image_container">
                 <img
                   src={wish?.productId?.productImages?.[0]?.url}
@@ -80,7 +80,7 @@ const WishList = ({ handleCancel }) => {
                 />
               </div>
               <img
-                onClick={() => removeFromWishlist()}
+                onClick={() => removeFromWishlist(wish?.productId?._id)}
                 src={removeIcon}
                 alt="Remove Icon"
                 className="whishlist_remove_icon"
