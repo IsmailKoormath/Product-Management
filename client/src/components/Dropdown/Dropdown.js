@@ -4,6 +4,7 @@ import arrow from "../../assets/Icons/arrow.svg";
 import { getSubCategoryApi } from "../../Redux/api/subCategoryApi";
 import { useDispatch, useSelector } from "react-redux";
 import { map } from "lodash";
+import { getAllProductsApi } from "../../Redux/api/productApi";
 
 const Dropdown = ({ labelText, id }) => {
   const [show, setShow] = useState(false);
@@ -18,14 +19,17 @@ const Dropdown = ({ labelText, id }) => {
     setShow(!show);
   };
 
-  const handleCheckboxChange = (option) => {
+  const handleCheckboxChange = (option,subid) => {
     const index = selectedOptions.indexOf(option);
     if (index === -1) {
       setSelectedOptions([...selectedOptions, option]);
-    } else {
+       dispatch(getAllProductsApi({ subid }));
+    }
+     else {
       const newSelectedOptions = [...selectedOptions];
       newSelectedOptions.splice(index, 1);
       setSelectedOptions(newSelectedOptions);
+       dispatch(getAllProductsApi({ subid }));
     }
   };
 
@@ -47,7 +51,7 @@ const Dropdown = ({ labelText, id }) => {
                 type="checkbox"
                 id={`checkbox-${sub._id}`}
                 checked={selectedOptions.includes(sub.subcategoryName)}
-                onChange={() => handleCheckboxChange(sub.subcategoryName)}
+                onChange={() => handleCheckboxChange(sub.subcategoryName,sub._id)}
               />
               <label htmlFor={`checkbox-${sub.subcategoryName}`}>
                 {sub.subcategoryName}

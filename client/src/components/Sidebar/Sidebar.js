@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { map } from "lodash";
-
 import "./Sidebar.css";
 import arrow from "../../assets/Icons/arrow.svg";
 import Dropdown from "../Dropdown/Dropdown";
@@ -8,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getallCategory } from "../../Redux/api/categoryApi";
 
 const Sidebar = () => {
-  const { getcategory, getsubcategory } = useSelector((state) => ({
+  const { getcategory } = useSelector((state) => ({
     getcategory: state.categoryReducer.getcategory,
     getsubcategory: state.subcategoryReducer.getsubcategory,
   }));
@@ -33,7 +32,6 @@ const Sidebar = () => {
             key={category._id}
             labelText={category.categoryName}
             id={category._id}
-            // options={["HP", "Dell"]}
           />
         ))}
 

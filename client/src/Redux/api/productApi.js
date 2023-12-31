@@ -32,7 +32,7 @@ export const addProductApi = (productData) => {
 
 // get all products
 
-export const getAllProductsApi = ({ title, currentPage, limitPerPage }) => {
+export const getAllProductsApi = ({ title, currentPage, limitPerPage, subid }) => {
   return async (dispatch) => {
     dispatch(getProductRequest());
 
@@ -40,8 +40,9 @@ export const getAllProductsApi = ({ title, currentPage, limitPerPage }) => {
       const products = await axiosApi.get(
         `/product/all?search=${
           title ? title : ""
-        }&&page=${currentPage}&&limit=${limitPerPage}`
+        }&&page=${currentPage}&&limit=${limitPerPage}`,{subcategory:subid}
       );
+      console.log(products);
       dispatch(getProductSuccess(products.data));
     } catch (error) {
       console.log(error);

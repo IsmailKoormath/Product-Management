@@ -82,18 +82,18 @@ export async function getAll(page, limit, query) {
   if (query?.search) {
     queryData["$or"] = [
       { title: { $regex: query?.search ? query?.search : "", $options: "i" } },
-      // {
-      //   "subcategory.subcategoryName": {
-      //     $regex: query?.search ? query?.search : "",
-      //     $options: "i",
-      //   },
-      // },
-      // {
-      //   "category.categoryName": {
-      //     $regex: query?.search ? query?.search : "",
-      //     $options: "i",
-      //   },
-      // },
+      {
+        "subcategory.subcategoryName": {
+          $regex: query?.search ? query?.search : "",
+          $options: "i",
+        },
+      },
+      {
+        "category.categoryName": {
+          $regex: query?.search ? query?.search : "",
+          $options: "i",
+        },
+      },
     ];
   }
 
