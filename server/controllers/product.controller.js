@@ -2,6 +2,7 @@ import {
   findAllProductBySubcategory,
   findSingleProduct,
   getAll,
+  productUpdate,
   ratingProduct,
   saveProduct,
 } from "../services/product.service.js";
@@ -11,6 +12,18 @@ export async function createProduct(req, res, next) {
     const productData = req.body;
     const files = req.files;
     const product = await saveProduct(productData, files);
+
+    res.status(200).send(product);
+  } catch (err) {
+    next(err);
+  }
+}
+export async function updateProduct(req, res, next) {
+  try {
+    const productData = req.body;
+    const productId = req.params.id;
+    const files = req.files;
+    const product = await productUpdate(productId, productData, files);
 
     res.status(200).send(product);
   } catch (err) {

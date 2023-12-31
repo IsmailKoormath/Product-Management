@@ -7,8 +7,8 @@ const { toNumber } = lodash;
 
 export async function saveProduct(productData, files) {
   const productImages = [];
-console.log(productData);
-console.log(files);
+  console.log(productData);
+  console.log(files);
   for (const fileType in files) {
     if (Object.prototype.hasOwnProperty.call(files, fileType)) {
       const fileList = files[fileType]; // Get the array of files for the current type
@@ -43,6 +43,29 @@ console.log(files);
     productImages,
     category,
   });
+  return { product };
+}
+
+export async function productUpdate(productId, productData) {
+
+  if (productData.subcategory) {
+    const categoryData = await findSubcategory(
+      productData.subcategory.subcategoryId
+    );
+    const category = {
+      categoryId: categoryData._id,
+      categoryName: categoryData.categoryName,
+    };
+    productData.category = category;
+  }
+
+  const product = await productModel.findByIdAndUpdate(
+      productId,
+      productData,
+    
+    { new: true }
+  );
+ if (!product) throw new HttpException(404, "product not found");
   return { product };
 }
 

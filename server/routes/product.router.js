@@ -4,6 +4,7 @@ import {
   createProduct,
   productRating,
   getAllProductBySubcategory,
+  updateProduct,
 } from "../controllers/product.controller.js";
 
 import express from "express";
@@ -32,6 +33,12 @@ router.post(
   authorizeRoles([ROLES.USER]),
   productValidator,
   createProduct
+);
+router.put(
+  `${path}/update/:id`,
+  cpUpload,
+  // authorizeRoles([ROLES.USER]),
+  updateProduct
 );
 router.post(`${path}/rating/:id`, authorizeRoles([ROLES.USER]), productRating);
 router.get(`${path}/single/:id`, getSingleProduct);
