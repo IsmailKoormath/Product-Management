@@ -18,7 +18,7 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getallCategory());
-  },[]);
+  }, []);
 
   return (
     <div className="sidebar_main">

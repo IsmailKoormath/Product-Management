@@ -4,23 +4,34 @@ import heart from "../../assets/Icons/heart-white.svg";
 import cart from "../../assets/Icons/shopping-cart.svg";
 import { Link } from "react-router-dom";
 import WishList from "../WishList/WishList";
+import { useDispatch } from "react-redux";
+import { getAllProductsApi } from "../../Redux/api/productApi";
 
 const Header = () => {
   const [showWishlist, setShowWishlist] = useState(false);
+  const [title, setTitle] = useState("");
+
+  const dispatch = useDispatch();
 
   const handleShowwishlist = () => {
-    setShowWishlist(!showWishlist)
-  }
+    setShowWishlist(!showWishlist);
+  };
+  const handleSearchProduct = () => {
+    dispatch(getAllProductsApi(title));
+  };
   return (
     <>
       <header className="header_main">
         <form action="" className="search_form">
           <input
+            onChange={(e) => setTitle(e.target.value)}
             type="search"
             className="search_input"
             placeholder="Serach any things"
           />
-          <button className="search_btn">Search</button>
+          <button onClick={handleSearchProduct} className="search_btn">
+            Search
+          </button>
         </form>
         <div className="second_section">
           <div className="icon_container" onClick={handleShowwishlist}>

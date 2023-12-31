@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Dropdown.css";
 import arrow from "../../assets/Icons/arrow.svg";
-import { getallSubCategory } from "../../Redux/api/subCategoryApi";
+import { getSubCategoryApi } from "../../Redux/api/subCategoryApi";
 import { useDispatch, useSelector } from "react-redux";
 import { map } from "lodash";
 
@@ -17,7 +17,7 @@ const Dropdown = ({ labelText, id }) => {
   const dispatch = useDispatch();
 
   const handleShowOptions = (id) => {
-    dispatch(getallSubCategory(id));
+    dispatch(getSubCategoryApi(id));
     setShow(!show);
   };
 

@@ -5,6 +5,9 @@ import {
   GETSUBCATEGORY_FAIL,
   GETSUBCATEGORY_REQUEST,
   GETSUBCATEGORY_SUCCESS,
+  GET_ALLSUBCATEGORY_FAIL,
+  GET_ALLSUBCATEGORY_REQUEST,
+  GET_ALLSUBCATEGORY_SUCCESS,
 } from "../ActionTypes";
 
 //ADD subcategory
@@ -20,6 +23,23 @@ export const AddsubCategorySuccess = (subcategory) => ({
 
 export const AddsubCategoryFail = (error) => ({
   type: ADDSUBCATEGORY_FAIL,
+  payload: error,
+});
+
+// get ALL subcategories
+
+export const getAllSubCategoryRequest = () => ({
+  type: GET_ALLSUBCATEGORY_REQUEST,
+  payload: '',
+});
+
+export const getAllSubCategorySuccess = (subcategory) => ({
+  type: GET_ALLSUBCATEGORY_SUCCESS,
+  payload: subcategory,
+});
+
+export const getAllSubCategoryFail = (error) => ({
+  type: GET_ALLSUBCATEGORY_FAIL,
   payload: error,
 });
 

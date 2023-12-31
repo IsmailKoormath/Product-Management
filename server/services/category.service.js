@@ -1,4 +1,5 @@
 import categoryModel from "../models/categoryModel.js";
+import { HttpException } from "../exceptions/exceptions.js";
 import lodash from "lodash";
 const { toNumber } = lodash;
 

@@ -68,7 +68,7 @@ const CategoryModal = ({ handleClose, heading, placeholder }) => {
           />
         </form>
         <div className="button_container">
-          <AddButton
+          <AddButton text={'Add'}
             onClick={(e) => {
               if (heading === "Add Sub Category") {
                 addSubCategory(e);

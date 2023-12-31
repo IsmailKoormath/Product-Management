@@ -1,14 +1,15 @@
-import { ADDSUBCATEGORY_FAIL, ADDSUBCATEGORY_REQUEST, ADDSUBCATEGORY_SUCCESS, GETSUBCATEGORY_FAIL, GETSUBCATEGORY_REQUEST, GETSUBCATEGORY_SUCCESS } from "../ActionTypes";
+import { ADDSUBCATEGORY_FAIL, ADDSUBCATEGORY_REQUEST, ADDSUBCATEGORY_SUCCESS, GETSUBCATEGORY_FAIL, GETSUBCATEGORY_REQUEST, GETSUBCATEGORY_SUCCESS, GET_ALLSUBCATEGORY_FAIL, GET_ALLSUBCATEGORY_REQUEST, GET_ALLSUBCATEGORY_SUCCESS } from "../ActionTypes";
 
 const initiailState = {
   loding: false,
   error: "",
   subcategory: {},
+  Allsubcategory:[],
   getsubcategory: [],
 };
 const subcategoryReducer = (state = initiailState, action) => {
   switch (action.type) {
-    // add category
+    // add subcategory
 
     case ADDSUBCATEGORY_REQUEST:
       return {
@@ -30,7 +31,29 @@ const subcategoryReducer = (state = initiailState, action) => {
         error: action.payload,
       };
 
-    // get category
+    // get all subcategory
+
+    case GET_ALLSUBCATEGORY_REQUEST:
+      return {
+        ...state,
+        loding: true,
+      };
+
+    case GET_ALLSUBCATEGORY_SUCCESS:
+      return {
+        ...state,
+        loding: false,
+        Allsubcategory: action.payload,
+      };
+
+    case GET_ALLSUBCATEGORY_FAIL:
+      return {
+        ...state,
+        loding: false,
+        error: action.payload,
+      };
+
+    // get subcategory
 
     case GETSUBCATEGORY_REQUEST:
       return {

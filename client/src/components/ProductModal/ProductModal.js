@@ -1,18 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ProductModal.css";
 import AddButton from "../AddButton/AddButton";
 import DiscardButton from "../AddButton/DiscardButton";
 import addVarient from "../../assets/Icons/add-varient.svg";
 import arrow from "../../assets/Icons/arrow.svg";
 import crossIcon from "../../assets/Icons/cross-icon.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { getallSubCategoryApi } from "../../Redux/api/subCategoryApi";
+import { addProductApi } from "../../Redux/api/productApi";
+import { map } from "lodash";
 
-const ProductModal = ({ handleClose }) => {
+const ProductModal = ({ handleClose,heading }) => {
   const [count, setCount] = useState(1);
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const[selectedSubCategory,setSelectedSubCategory]=useState()
-  const [product,setProduct]=useState({
-    count
-  })
+  const [formData, setFormData] = useState({
+    title: "",
+    ram: "",
+    price: "",
+    totalProductCount: count,
+    subcategory: {
+      subcategoryId: "",
+      subcategoryName: "",
+    },
+    description: "",
+  });
+  console.log(formData);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getallSubCategoryApi());
+  }, []);
+
+  const { Allsubcategory } = useSelector((state) => state.subcategoryReducer);
 
   const handleIncreaseCount = () => {
     setCount((prevCount) => prevCount + 1);
@@ -22,30 +41,27 @@ const ProductModal = ({ handleClose }) => {
       setCount((prevCount) => prevCount - 1);
     }
   };
-  
-// take product details
-
-     const handleProductDetails = (e) => {
-       setProduct({
-         ...product,
-         [e.target.name]: e.target.value,
-       });
-     };
-
- // take images from the file
 
   const handleFileChange = (event) => {
     const files = event.target.files;
     const filesArray = Array.from(files);
 
+    // Check if the limit is reached
     if (selectedFiles.length + filesArray.length <= 3) {
+      // Update the state with the selected files
       setSelectedFiles((prevFiles) => [...prevFiles, ...filesArray]);
     } else {
       alert("You can only pick up to 3 images.");
     }
   };
 
-  // remove image function
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   const removeImage = (index) => {
     const newFiles = [...selectedFiles];
@@ -53,18 +69,34 @@ const ProductModal = ({ handleClose }) => {
     setSelectedFiles(newFiles);
   };
 
+  const handleFormSubmit = async () => {
+    const formDataWithFiles = new FormData();
+
+    // Append existing form data fields
+    Object.entries(formData).forEach(([key, value]) => {
+      formDataWithFiles.append(key, value);
+    });
+
+    // Append each selected file to the FormData object
+    // selectedFiles.forEach((file, index) => {
+    formDataWithFiles.append(`productImages`, selectedFiles);
+    // });
+
+    dispatch(addProductApi(formDataWithFiles));
+  };
+
   const hideFilePicker = selectedFiles.length >= 3;
 
   return (
     <div className="productModal_main">
       <div className="productModal_card">
-        <h3 className="heading_text">Add Product</h3>
+        <h3 className="heading_text">{heading}</h3>
         <form action="">
           <div className="row_container">
             <label htmlFor="title">Title :</label>
             <input
               name="title"
-              onChange={handleProductDetails}
+              onChange={handleInputChange}
               id="title"
               type="text"
               className="title_input"
@@ -75,7 +107,7 @@ const ProductModal = ({ handleClose }) => {
             <div className="ram_input_row">
               <input
                 name="ram"
-                onChange={handleProductDetails}
+                onChange={handleInputChange}
                 id="ram"
                 type="number"
                 placeholder="Ram"
@@ -83,7 +115,7 @@ const ProductModal = ({ handleClose }) => {
               />
               <input
                 name="price"
-                onChange={handleProductDetails}
+                onChange={handleInputChange}
                 id="number"
                 type="number"
                 placeholder="Price"
@@ -115,15 +147,39 @@ const ProductModal = ({ handleClose }) => {
             <label htmlFor="product" className="subCategoryLabel">
               sub category :
             </label>
-            <select name="" id="">
+            <select
+              value={formData?.subcategory?.subcategoryId}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  subcategory: {
+                    ...formData.subcategory,
+                    subcategoryId: e.target.value,
+                    subcategoryName:
+                      e.target.options[e.target.selectedIndex].text,
+                  },
+                })
+              }
+              name=""
+              id=""
+            >
               <option value="">Select sub category</option>
-              <option value="">hello</option>
-              <option value="">hai</option>
+              {map(Allsubcategory?.subcategory, (sub) => (
+                <option key={sub._id} value={sub._id}>
+                  {sub.subcategoryName}
+                </option>
+              ))}
             </select>
           </div>
           <div className="row_container">
             <label htmlFor="description">Add Description :</label>
-            <input name="description" onChange={handleProductDetails} id="description" type="text" className="title_input" />
+            <input
+              name="description"
+              onChange={handleInputChange}
+              id="description"
+              type="text"
+              className="title_input"
+            />
           </div>
           <div className="row_container">
             <label htmlFor="description">Upload image:</label>
@@ -154,7 +210,7 @@ const ProductModal = ({ handleClose }) => {
           </div>
         </form>
         <div className="button_container">
-          <AddButton />
+          <AddButton text={heading==='Edit Product' ?'Edit':'Add'} onClick={handleFormSubmit} />
           <DiscardButton onClick={handleClose} />
         </div>
       </div>

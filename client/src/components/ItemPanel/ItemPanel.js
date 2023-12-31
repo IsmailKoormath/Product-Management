@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./ItemPanel.css";
+import { map } from "lodash";
 import BodyButton from "../BodyButton/BodyButton";
 import ItemCard from "../ItemCard/ItemCard";
 import CategoryModal from "../CategoryModal/CategoryModal";
@@ -7,6 +8,8 @@ import ProductModal from "../ProductModal/ProductModal";
 import arrow from "../../assets/Icons/arrow.svg";
 import Pagination from "@mui/material/Pagination";
 import { useDispatch, useSelector } from "react-redux";
+import { getAllProductsApi } from "../../Redux/api/productApi";
+import { Link } from "react-router-dom";
 
 const ItemPanel = () => {
   const [categoryModal, setCategoryModal] = useState(false);
@@ -15,9 +18,13 @@ const ItemPanel = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 10;
 
-
+  const { AllProducts } = useSelector((state) => state.productReducer);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllProductsApi());
+  }, [dispatch]);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
@@ -59,10 +66,11 @@ const ItemPanel = () => {
           />
         </div>
         <div className="panel_card_container">
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
+          {map(AllProducts, (product) => (
+            <Link to={`/productdetails/:id`}>
+              <ItemCard product={product} />
+            </Link>
+          ))}
         </div>
         <div className="pagination_container">
           <h5 className="total_counts_text">10 of 456 items</h5>
@@ -93,7 +101,12 @@ const ItemPanel = () => {
           placeholder={"Enter sub category name"}
         />
       )}
-      {productModal && <ProductModal handleClose={handleProductModal} />}
+      {productModal && (
+        <ProductModal
+          heading={"Add Product"}
+          handleClose={handleProductModal}
+        />
+      )}
     </>
   );
 };

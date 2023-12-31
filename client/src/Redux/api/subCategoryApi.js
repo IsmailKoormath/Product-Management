@@ -1,8 +1,16 @@
-// add new subcategory
-
 import { axiosApi } from "../AxiosMethod";
-import { AddsubCategoryFail, AddsubCategoryRequest, AddsubCategorySuccess, getSubCategoryFail, getSubCategoryRequest, getSubCategorySuccess } from "../actions/subCategoryAction";
-
+import {
+  AddsubCategoryFail,
+  AddsubCategoryRequest,
+  AddsubCategorySuccess,
+  getAllSubCategoryFail,
+  getAllSubCategoryRequest,
+  getAllSubCategorySuccess,
+  getSubCategoryFail,
+  getSubCategoryRequest,
+  getSubCategorySuccess,
+} from "../actions/subCategoryAction";
+// add new subcategory
 export const addSubCategoryApi = (input) => {
   return async (dispatch) => {
     dispatch(AddsubCategoryRequest(input));
@@ -18,9 +26,26 @@ export const addSubCategoryApi = (input) => {
   };
 };
 
+// get all subcategories
+
+export const getallSubCategoryApi = () => {
+  return async (dispatch) => {
+    dispatch(getAllSubCategoryRequest());
+
+    try {
+      const subcategory = await axiosApi.get(`/subcategory/all`);
+      console.log(subcategory);
+      dispatch(getAllSubCategorySuccess(subcategory.data));
+    } catch (error) {
+      console.log(error);
+      dispatch(getAllSubCategoryFail(error?.response));
+    }
+  };
+};
+
 // get subcategories
 
-export const getallSubCategory = (categoryid) => {
+export const getSubCategoryApi = (categoryid) => {
   return async (dispatch) => {
     dispatch(getSubCategoryRequest(categoryid));
 
