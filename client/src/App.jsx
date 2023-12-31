@@ -3,10 +3,11 @@ import SignUp from './pages/SignUP/SignUp';
 import SignIn from './pages/SignIn/SignIn';
 import ProductDetails from './pages/ProductDetails/ProductDetails';
 import Home from './pages/Home/Home';
-import { BrowserRouter as Router,Routes,Route} from 'react-router-dom';
+import { BrowserRouter as Router,Routes,Route, useNavigate} from 'react-router-dom';
 
 
 function App() {
+
   return (
     <div className="App">
       <Router>

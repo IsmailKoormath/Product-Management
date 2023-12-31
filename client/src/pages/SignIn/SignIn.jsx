@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CustomInput from '../../components/CustomInput/CustomInput'
 import mail from "../../assets/Icons/mail.svg"
 import lock from "../../assets/Icons/lock.svg"
@@ -29,6 +29,12 @@ const SignIn = () => {
             [e.target.name]: e.target.value
         })
     }
+    useEffect(()=>{
+        const token = localStorage.getItem("token");
+        if (token) {
+            navigate('/home')
+        }
+    })
     return (
         <div className='signinPage'>
             <div className='signin-leftside'>
