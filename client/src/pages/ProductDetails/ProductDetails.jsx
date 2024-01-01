@@ -6,7 +6,7 @@ import Header from '../../components/Header/Header'
 import wishlisticon from '../../assets/Icons/heart-dark.svg'
 import arrow from '../../assets/Icons/arrow.svg'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { getSingleProductApi } from '../../Redux/api/productApi'
 import ProductModal from '../../components/ProductModal/ProductModal'
 import { managewishlistApi } from '../../Redux/api/wishlistApi'
@@ -25,7 +25,7 @@ const ProductDetails = () => {
   useEffect(() => {
     dispatch(getSingleProductApi(productId))
   }, [dispatch,productId])
-  console.log(singleProduct);
+
   // for wish list handle
   const handleWishlist = () => {
     dispatch(managewishlistApi(productId));
@@ -49,16 +49,16 @@ const ProductDetails = () => {
   return (
     <>
       <Header />
-      <div className="productDetailsPath">
-        Home <img className="arrow_icon" src={arrow} alt="Arrow" />
+      <Link to='/home' style={{ textDecoration: "none" }}><div className="productDetailsPath">
+          Home <img className="arrow_icon" src={arrow} alt="Arrow" />
         Product details<img className="arrow_icon" src={arrow} alt="Arrow" />
-      </div>
+      </div></Link>
       <div className='productDetailspage'>
         <div className='productImages'>
-          <div className='productMainImage'><img src={singleProduct?.product?.productImages[0]?.url} alt='product' /></div>
+          <div className='productMainImage'><img src={singleProduct?.product?.productImages?.[0]?.url} alt='product' /></div>
           <div className='moreImages'>
-            <div className='otherImages'><img src={singleProduct?.product?.productImages[1]?.url} alt='product' /></div>
-            <div className='otherImages'><img src={singleProduct?.product?.productImages[2]?.url} alt='product' /></div>
+            <div className='otherImages'><img src={singleProduct?.product?.productImages?.[1]?.url} alt='product' /></div>
+            <div className='otherImages'><img src={singleProduct?.product?.productImages?.[2]?.url} alt='product' /></div>
           </div>
         </div>
         <div className='productsDetails'>

@@ -6,9 +6,12 @@ import {
   editProductFail,
   editProductRequest,
   editProductSuccess,
+  getProdgetProductwishSubCategoryFailuctFail,
   getProductFail,
   getProductRequest,
   getProductSuccess,
+  getProductwishSubCategoryRequest,
+  getProductwishSubCategorySuccess,
   singleProductFail,
   singleProductRequest,
   singleProductSuccess,
@@ -32,7 +35,12 @@ export const addProductApi = (productData) => {
 
 // get all products
 
-export const getAllProductsApi = ({ title, currentPage, limitPerPage, subid }) => {
+export const getAllProductsApi = ({
+  title,
+  currentPage,
+  limitPerPage,
+  subid,
+}) => {
   return async (dispatch) => {
     dispatch(getProductRequest());
 
@@ -40,9 +48,8 @@ export const getAllProductsApi = ({ title, currentPage, limitPerPage, subid }) =
       const products = await axiosApi.get(
         `/product/all?search=${
           title ? title : ""
-        }&&page=${currentPage}&&limit=${limitPerPage}`,{subcategory:{subcategoryId:subid}}
+        }&&page=${currentPage}&&limit=${limitPerPage}`
       );
-      console.log(products);
       dispatch(getProductSuccess(products.data));
     } catch (error) {
       console.log(error);
@@ -50,12 +57,29 @@ export const getAllProductsApi = ({ title, currentPage, limitPerPage, subid }) =
     }
   };
 };
+
+// get all products with subcategory
+export const getAllProductswithSubCategoryApi = (subcategory) => {
+  return async (dispatch) => {
+    dispatch(getProductwishSubCategoryRequest());
+
+    try {
+      const products = await axiosApi.get(
+        `/product/subcategory/all?subcategory=${subcategory}`,
+      );
+      dispatch(getProductwishSubCategorySuccess(products.data));
+    } catch (error) {
+      console.log(error);
+      dispatch(getProdgetProductwishSubCategoryFailuctFail(error?.response));
+    }
+  };
+};
+
 // get single product
 
 export const getSingleProductApi = (productId) => {
   return async (dispatch) => {
     dispatch(singleProductRequest(productId));
-
     try {
       const product = await axiosApi.get(`/product/single/${productId}`);
       dispatch(singleProductSuccess(product.data));

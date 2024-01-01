@@ -17,7 +17,6 @@ const WishList = ({ handleCancel }) => {
     dispatch(getallwishlistApi());
   }, []);
 
-  console.log("wish",AllWishlist.wishList);
   const removeFromWishlist=(productId)=>{
     dispatch(managewishlistApi(productId));
   }

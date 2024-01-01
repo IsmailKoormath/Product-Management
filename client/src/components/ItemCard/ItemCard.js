@@ -23,7 +23,6 @@ const ItemCard = ({ product }) => {
 
   // handle wishlist
   const handleFavourite = (productId) => {
-    console.log("productid", productId);
     dispatch(managewishlistApi(productId));
     setFavourite(!favourite);
   };
@@ -37,7 +36,7 @@ const ItemCard = ({ product }) => {
         <img src={heart} alt="Heart" />
       </div>
       <div className="card_image_section">
-        <img src={product?.productImages[0]?.url} alt="Product_Image" />
+        <img src={product?.productImages?.[0]?.url} alt="Product_Image" />
       </div>
       <Link to={`/productdetails/${product._id}`}>
         <div className="card_content_section">

@@ -75,7 +75,8 @@ const ItemPanel = () => {
         </div>
         <div className="pagination_container">
           <h5 className="total_counts_text">
-            {limitPerPage} of {NumProducts} items
+            {NumProducts > limitPerPage ? limitPerPage : NumProducts} of{" "}
+            {NumProducts} items
           </h5>
           <Pagination
             color="warning"

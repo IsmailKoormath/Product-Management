@@ -58,9 +58,9 @@ export async function getAllProduct(req, res, next) {
 
 export async function getAllProductBySubcategory(req, res, next) {
   try {
-    const subcategories = req.body.subcategory;
+    const subcategories = req.query.subcategory;
     const page = req.query.page;
-    const limit = req.query.limit || "10";
+    const limit = req.query.limit || 10;
     const result = await findAllProductBySubcategory(
       page,
       limit,

@@ -22,14 +22,12 @@ const ProductModal = ({ handleClose, heading }) => {
     title: "",
     ram: "",
     price: "",
-    totalProductCount: count,
     description: "",
     subcategory: {
       subcategoryId: "",
       subcategoryName: "",
     },
   });
-
   const dispatch = useDispatch();
   const params = useParams();
   const productId = params.id;
@@ -38,10 +36,6 @@ const ProductModal = ({ handleClose, heading }) => {
     Allsubcategory: state.subcategoryReducer.Allsubcategory,
     singleProduct: state.productReducer.singleProduct,
   }));
-
-  console.log("====================================");
-  console.log(singleProduct);
-  console.log("====================================");
 
   useEffect(() => {
     dispatch(getallSubCategoryApi());
@@ -92,17 +86,19 @@ const ProductModal = ({ handleClose, heading }) => {
     product.append("title", data.title);
     product.append("ram", data.ram);
     product.append("price", data.price);
-    product.append("totalProductCount", data.totalProductCount);
+    product.append("totalProductCount", count);
     product.append("description", data.description);
     product.append(
       "subcategory[subcategoryId]",
       data?.subcategory?.subcategoryId
     );
-    console.log(product);
     if (heading === "Edit Product") {
       dispatch(editProductApi(product, productId));
+      setData("")
+
     } else {
       dispatch(addProductApi(product));
+      setData("");
     }
   };
 
@@ -139,7 +135,7 @@ const ProductModal = ({ handleClose, heading }) => {
               <input
                 name="price"
                 onChange={handleInputChange}
-                value={data.price}
+                value={data?.price}
                 id="number"
                 type="number"
                 placeholder="Price"
@@ -161,7 +157,7 @@ const ProductModal = ({ handleClose, heading }) => {
                 className="arrow_left"
                 onClick={handleDecreaseCount}
               />
-              <span value={data.totalProductCount}>{count}</span>
+              <span>{count}</span>
               <img
                 src={arrow}
                 alt="Arrow Right"
@@ -190,7 +186,7 @@ const ProductModal = ({ handleClose, heading }) => {
               <option value="">Select sub category</option>
               {map(Allsubcategory?.subcategory, (sub) => (
                 <option key={sub._id} value={sub._id}>
-                  {sub.subcategoryName}
+                  {sub?.subcategoryName}
                 </option>
               ))}
             </select>
@@ -199,7 +195,7 @@ const ProductModal = ({ handleClose, heading }) => {
             <label htmlFor="description">Add Description :</label>
             <input
               name="description"
-              value={data.description}
+              value={data?.description}
               onChange={handleInputChange}
               id="description"
               type="text"

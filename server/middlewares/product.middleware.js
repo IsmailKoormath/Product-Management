@@ -1,5 +1,4 @@
 export function productValidator(req, res, next) {
-  console.log(req.body);
   if (req.body) {
     let { title, price } = req.body;
 

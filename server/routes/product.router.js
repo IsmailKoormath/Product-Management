@@ -37,7 +37,6 @@ router.post(
 router.put(
   `${path}/update/:id`,
   cpUpload,
-  // authorizeRoles([ROLES.USER]),
   updateProduct
 );
 router.post(`${path}/rating/:id`, authorizeRoles([ROLES.USER]), productRating);

@@ -15,14 +15,8 @@ const CategoryModal = ({ handleClose, heading, placeholder }) => {
     categoryId: "",
     subcategoryName: ""
   })
-  // const [data, setData] = useState({
-  //   category: "",
-  //   subCateogry: "",
-  // });
+
   const { getcategory } = useSelector((state) => state.categoryReducer);
-
-
-  console.log(subCategory);
 
   const dispatch = useDispatch();
   // add new category

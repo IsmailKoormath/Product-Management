@@ -6,8 +6,11 @@ import {
   EDIT_PRODUCT_FAIL,
   EDIT_PRODUCT_SUCCESS,
   GET_ALLPRODUCTS_REQUEST,
+  GET_ALLPRODUCTS_WITH_SUBCATEGORY_REQUEST,
   GET_ALLPRODUCT_FAIL,
   GET_ALLPRODUCT_SUCCESS,
+  GET_ALLPRODUCT_WITH_SUBCATEGORY_FAIL,
+  GET_ALLPRODUCT_WITH_SUBCATEGORY_SUCCESS,
   GET_PRODUCTS_REQUEST,
   GET_PRODUCT_FAIL,
   GET_PRODUCT_SUCCESS,
@@ -60,6 +63,28 @@ const productReducer = (state = initiailState, action) => {
       };
 
     case GET_ALLPRODUCT_FAIL:
+      return {
+        ...state,
+        loding: false,
+        error: action.payload,
+      };
+
+    // get all products with subcategory
+
+    case GET_ALLPRODUCTS_WITH_SUBCATEGORY_REQUEST:
+      return {
+        ...state,
+        loding: true,
+      };
+
+    case GET_ALLPRODUCT_WITH_SUBCATEGORY_SUCCESS:
+      return {
+        ...state,
+        loding: false,
+        AllProducts: action.payload,
+      };
+
+    case GET_ALLPRODUCT_WITH_SUBCATEGORY_FAIL:
       return {
         ...state,
         loding: false,
