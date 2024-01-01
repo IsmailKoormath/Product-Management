@@ -7,18 +7,17 @@ import arrow from "../../assets/Icons/arrow.svg";
 import crossIcon from "../../assets/Icons/cross-icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { getallSubCategoryApi } from "../../Redux/api/subCategoryApi";
-import { addProductApi, editProductApi } from "../../Redux/api/productApi";
+import {
+  addProductApi,
+  editProductApi,
+  getSingleProductApi,
+} from "../../Redux/api/productApi";
 import { map } from "lodash";
 import { useParams } from "react-router-dom";
 
 const ProductModal = ({ handleClose, heading }) => {
   const [count, setCount] = useState(1);
   const [selectedFiles, setSelectedFiles] = useState([]);
-  // const [subcategory, setSubCategory] = useState({
-  //   subcategoryId: "",
-  //   subcategoryName: "",
-  // });
-  // console.log(subcategory);
   const [data, setData] = useState({
     title: "",
     ram: "",
@@ -30,16 +29,25 @@ const ProductModal = ({ handleClose, heading }) => {
       subcategoryName: "",
     },
   });
-  console.log(data);
+
   const dispatch = useDispatch();
   const params = useParams();
   const productId = params.id;
 
+  const { Allsubcategory, singleProduct } = useSelector((state) => ({
+    Allsubcategory: state.subcategoryReducer.Allsubcategory,
+    singleProduct: state.productReducer.singleProduct,
+  }));
+
+  console.log("====================================");
+  console.log(singleProduct);
+  console.log("====================================");
+
   useEffect(() => {
     dispatch(getallSubCategoryApi());
+    dispatch(getSingleProductApi(productId));
+    setData(singleProduct?.product);
   }, []);
-
-  const { Allsubcategory } = useSelector((state) => state.subcategoryReducer);
 
   const handleIncreaseCount = () => {
     setCount((prevCount) => prevCount + 1);
@@ -78,9 +86,9 @@ const ProductModal = ({ handleClose, heading }) => {
 
   const handleFormSubmit = async () => {
     const product = new FormData();
-     selectedFiles.forEach((image, index) => {
-    product.append('product', image, image.name);
-  });
+    selectedFiles.forEach((image, index) => {
+      product.append("product", image, image.name);
+    });
     product.append("title", data.title);
     product.append("ram", data.ram);
     product.append("price", data.price);
@@ -88,16 +96,15 @@ const ProductModal = ({ handleClose, heading }) => {
     product.append("description", data.description);
     product.append(
       "subcategory[subcategoryId]",
-      data.subcategory.subcategoryId
+      data?.subcategory?.subcategoryId
     );
     console.log(product);
-    if(heading === "Edit Product"){
-dispatch(editProductApi(product, productId));
-   }
-    dispatch(addProductApi(product));
+    if (heading === "Edit Product") {
+      dispatch(editProductApi(product, productId));
+    } else {
+      dispatch(addProductApi(product));
+    }
   };
-
-  
 
   const hideFilePicker = selectedFiles.length >= 3;
 
@@ -111,6 +118,7 @@ dispatch(editProductApi(product, productId));
             <input
               name="title"
               onChange={handleInputChange}
+              value={data?.title}
               id="title"
               type="text"
               className="title_input"
@@ -121,6 +129,7 @@ dispatch(editProductApi(product, productId));
             <div className="ram_input_row">
               <input
                 name="ram"
+                value={data?.ram}
                 onChange={handleInputChange}
                 id="ram"
                 type="number"
@@ -130,6 +139,7 @@ dispatch(editProductApi(product, productId));
               <input
                 name="price"
                 onChange={handleInputChange}
+                value={data.price}
                 id="number"
                 type="number"
                 placeholder="Price"
@@ -151,7 +161,7 @@ dispatch(editProductApi(product, productId));
                 className="arrow_left"
                 onClick={handleDecreaseCount}
               />
-              <span>{count}</span>
+              <span value={data.totalProductCount}>{count}</span>
               <img
                 src={arrow}
                 alt="Arrow Right"
@@ -189,6 +199,7 @@ dispatch(editProductApi(product, productId));
             <label htmlFor="description">Add Description :</label>
             <input
               name="description"
+              value={data.description}
               onChange={handleInputChange}
               id="description"
               type="text"
@@ -226,7 +237,10 @@ dispatch(editProductApi(product, productId));
         <div className="button_container">
           <AddButton
             text={heading === "Edit Product" ? "Edit" : "Add"}
-            onClick={(e) => {handleFormSubmit();handleClose()}}
+            onClick={(e) => {
+              handleFormSubmit();
+              handleClose();
+            }}
           />
           <DiscardButton onClick={handleClose} />
         </div>

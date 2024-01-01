@@ -24,7 +24,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     dispatch(getSingleProductApi(productId))
-  }, [])
+  }, [dispatch,productId])
   console.log(singleProduct);
   // for wish list handle
   const handleWishlist = () => {

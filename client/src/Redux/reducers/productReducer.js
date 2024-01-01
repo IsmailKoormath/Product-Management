@@ -19,7 +19,6 @@ const initiailState = {
   product: {},
   AllProducts: [],
   singleProduct: {},
-  editProduct: {},
 };
 const productReducer = (state = initiailState, action) => {
   switch (action.type) {
@@ -101,7 +100,7 @@ const productReducer = (state = initiailState, action) => {
       return {
         ...state,
         loding: false,
-        editProduct: action.payload,
+        singleProduct: action.payload,
       };
 
     case EDIT_PRODUCT_FAIL:

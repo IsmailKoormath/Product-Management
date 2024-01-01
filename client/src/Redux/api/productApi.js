@@ -40,7 +40,7 @@ export const getAllProductsApi = ({ title, currentPage, limitPerPage, subid }) =
       const products = await axiosApi.get(
         `/product/all?search=${
           title ? title : ""
-        }&&page=${currentPage}&&limit=${limitPerPage}`,{subcategory:subid}
+        }&&page=${currentPage}&&limit=${limitPerPage}`,{subcategory:{subcategoryId:subid}}
       );
       console.log(products);
       dispatch(getProductSuccess(products.data));
