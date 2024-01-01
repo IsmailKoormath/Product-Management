@@ -38,9 +38,12 @@ const ProductModal = ({ handleClose, heading }) => {
   }));
 
   useEffect(() => {
+    setData(" ");
     dispatch(getallSubCategoryApi());
-    dispatch(getSingleProductApi(productId));
-    setData(singleProduct?.product);
+    if (productId) {
+      dispatch(getSingleProductApi(productId));
+      setData(singleProduct?.product);
+    }
   }, []);
 
   const handleIncreaseCount = () => {
@@ -94,11 +97,8 @@ const ProductModal = ({ handleClose, heading }) => {
     );
     if (heading === "Edit Product") {
       dispatch(editProductApi(product, productId));
-      setData("")
-
     } else {
       dispatch(addProductApi(product));
-      setData("");
     }
   };
 
