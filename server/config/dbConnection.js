@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 mongoose.set("strictQuery", false);
 
-const connection_string = "mongodb://127.0.0.1:27017/product-management";
+const connection_string = process.env.MONGODB_URL;
 
 export async function initialize() {
   try {
