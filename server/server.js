@@ -16,12 +16,13 @@ import { errorHandling } from "./middlewares/error.middleware.js";
 
 const app = express();
 
+await initialize();
+
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use("/uploads/products", express.static(path.join("uploads/products")));
 
-await initialize();
 
 app.get("/", (req, res) => {
   res.send({ message: "Hello World" });
